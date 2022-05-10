@@ -1,4 +1,5 @@
 import cookieParser from 'cookie-parser';
+import dotenv from 'dotenv';
 import express from 'express';
 import methodOverride from 'method-override';
 import webpack from 'webpack';
@@ -7,6 +8,8 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 
 import webpackConfig from './webpack_conf/webpack.dev.js';
 import bindRoutes from './routes.mjs';
+
+dotenv.config();
 
 // Initialise Express instance
 const app = express();
