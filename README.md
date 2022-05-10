@@ -53,7 +53,7 @@ App that allows:
 |                      | CRUD for lesson logs                                       |
 |                      | CRUD for comments                                          |
 |                      | Generate "invoice-like" page based on lesson logs recorded |
-| **Comfortable**      | Tidy up CSS, Light/Dark mode                                |
+| **Comfortable**      | Tidy up CSS                                                |
 |                      | Calendar view for scheduling                               |
 |                      | Statistics for income tracking (Graph.js)                  |
 |                      | Generate PDF for invoices (npm library)                    |
