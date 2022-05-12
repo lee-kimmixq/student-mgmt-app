@@ -6,7 +6,8 @@ export default function SignupForm() {
   const [usernameMessage, setUsernameMessage] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
-  const [accountType, setAccountType] = useState('parent');
+  const [accountType, setAccountType] = useState('');
+  const [accountTypeMessage, setAccountTypeMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
   const handleUsernameChange = (e) => {
@@ -33,12 +34,20 @@ export default function SignupForm() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    if (accountType === '') {
+      setAccountTypeMessage('Please choose an account type!');
+      return;
+    }
     try {
       const { data } = await axios.post('/signup', {
         username, password, displayName, accountType,
       });
       if (data.signup === true) {
         setSuccessMessage('Successfully signed up! Please log in.');
+        setUsername('');
+        setPassword('');
+        setDisplayName('');
+        setAccountType('');
       }
     } catch (err) {
       console.log(err.response.data);
@@ -61,9 +70,11 @@ export default function SignupForm() {
       <br />
       <label htmlFor="account-type">Account Type:</label>
       <select id="account-type" onChange={handleAccountTypeChange}>
+        <option value="">Select Account Type</option>
         <option value="parent">Parent</option>
         <option value="teacher">Teacher</option>
       </select>
+      <span>{accountTypeMessage}</span>
       <br />
       <button type="submit" onClick={handleSignup}>Sign Up</button>
       <p>{successMessage}</p>
