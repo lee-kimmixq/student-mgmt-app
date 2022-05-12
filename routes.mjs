@@ -12,6 +12,7 @@ export default function routes(app) {
     res.clearCookie('loggedInHash');
     res.send({});
   });
+  app.post('/signup', UserController.signup);
 
   // Root route renders Webpack-generated main.html file
   app.get('/', (_, res) => {
