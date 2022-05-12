@@ -5,6 +5,8 @@ export default function SignupForm() {
   const [username, setUsername] = useState('');
   const [usernameMessage, setUsernameMessage] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordMessage, setPasswordMessage] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [accountType, setAccountType] = useState('');
   const [accountTypeMessage, setAccountTypeMessage] = useState('');
@@ -20,8 +22,19 @@ export default function SignupForm() {
     setUsernameMessage(message);
   };
 
+  const checkPasswordMatch = async (pw1, pw2) => {
+    const message = pw1 === pw2 ? 'Match' : 'Passwords do not match';
+    setPasswordMessage(message);
+  };
+
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+    checkPasswordMatch(e.target.value, confirmPassword);
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+    checkPasswordMatch(password, e.target.value);
   };
 
   const handleDisplayNameChange = (e) => {
@@ -63,7 +76,8 @@ export default function SignupForm() {
       <label htmlFor="password">Password:</label>
       <input type="password" id="password" onChange={handlePasswordChange} />
       <label htmlFor="confirm-password">Confirm Password:</label>
-      <input type="confirm-password" id="confirm-password" onChange={handlePasswordChange} />
+      <input type="password" id="confirm-password" onChange={handleConfirmPasswordChange} />
+      <span>{passwordMessage}</span>
       <br />
       <label htmlFor="display-name">Display Name:</label>
       <input type="text" id="display-name" onChange={handleDisplayNameChange} />
