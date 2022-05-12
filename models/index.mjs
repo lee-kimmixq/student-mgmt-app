@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize';
 import url from 'url';
 import allConfig from '../db/config/config.js';
+import initContractModel from './contract.mjs';
 import initUserModel from './user.mjs';
 
 const env = process.env.NODE_ENV || 'development';
@@ -32,6 +33,27 @@ if (env === 'production') {
 }
 
 db.User = initUserModel(sequelize, Sequelize.DataTypes);
+db.Contract = initContractModel(sequelize, Sequelize.DataTypes);
+
+db.User.hasMany(db.Contract, {
+  as: 'jobs',
+  foreignKey: 'teacherId',
+});
+
+db.User.hasMany(db.Contract, {
+  as: 'classes',
+  foreignKey: 'parentId',
+});
+
+db.Contract.belongsTo(db.User, {
+  as: 'teacher',
+  foreignKey: 'teacherId',
+});
+
+db.Contract.belongsTo(db.User, {
+  as: 'parent',
+  foreignKey: 'parentId',
+});
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
