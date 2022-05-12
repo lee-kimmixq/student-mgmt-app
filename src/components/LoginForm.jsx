@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default function LoginForm({ setIsUserLoggedIn }) {
@@ -26,12 +27,15 @@ export default function LoginForm({ setIsUserLoggedIn }) {
   };
 
   return (
-    <form>
-      <label htmlFor="username">Username:</label>
-      <input type="text" id="username" onChange={handleUsernameChange} />
-      <label htmlFor="password">Password:</label>
-      <input type="password" id="password" onChange={handlePasswordChange} />
-      <button type="button" onClick={handleLogin}>Log In</button>
-    </form>
+    <div>
+      <Link to="/signup">Sign Up</Link>
+      <form>
+        <label htmlFor="username">Username:</label>
+        <input type="text" id="username" onChange={handleUsernameChange} />
+        <label htmlFor="password">Password:</label>
+        <input type="password" id="password" onChange={handlePasswordChange} />
+        <button type="button" onClick={handleLogin}>Log In</button>
+      </form>
+    </div>
   );
 }

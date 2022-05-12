@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default function SignupForm() {
@@ -94,31 +95,34 @@ export default function SignupForm() {
   };
 
   return (
-    <form>
-      <label htmlFor="username">Username:</label>
-      <input type="text" id="username" value={username} onChange={handleUsernameChange} onBlur={checkValidUsername} />
-      <span>{usernameMessage}</span>
-      <br />
-      <label htmlFor="password">Password:</label>
-      <input type="password" id="password" value={password} onChange={handlePasswordChange} />
-      <label htmlFor="confirm-password">Confirm Password:</label>
-      <input type="password" id="confirm-password" value={confirmPassword} onChange={handleConfirmPasswordChange} />
-      <span>{passwordMessage}</span>
-      <br />
-      <label htmlFor="display-name">Display Name:</label>
-      <input type="text" id="display-name" value={displayName} onChange={handleDisplayNameChange} />
-      <span>{displayNameMessage}</span>
-      <br />
-      <label htmlFor="account-type">Account Type:</label>
-      <select id="account-type" onChange={handleAccountTypeChange} value={accountType}>
-        <option value="">Select Account Type</option>
-        <option value="parent">Parent</option>
-        <option value="teacher">Teacher</option>
-      </select>
-      <span>{accountTypeMessage}</span>
-      <br />
-      <button type="submit" onClick={handleSignup}>Sign Up</button>
-      <p>{successMessage}</p>
-    </form>
+    <div>
+      <Link to="/">Log In</Link>
+      <form>
+        <label htmlFor="username">Username:</label>
+        <input type="text" id="username" value={username} onChange={handleUsernameChange} onBlur={checkValidUsername} />
+        <span>{usernameMessage}</span>
+        <br />
+        <label htmlFor="password">Password:</label>
+        <input type="password" id="password" value={password} onChange={handlePasswordChange} />
+        <label htmlFor="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" value={confirmPassword} onChange={handleConfirmPasswordChange} />
+        <span>{passwordMessage}</span>
+        <br />
+        <label htmlFor="display-name">Display Name:</label>
+        <input type="text" id="display-name" value={displayName} onChange={handleDisplayNameChange} />
+        <span>{displayNameMessage}</span>
+        <br />
+        <label htmlFor="account-type">Account Type:</label>
+        <select id="account-type" onChange={handleAccountTypeChange} value={accountType}>
+          <option value="">Select Account Type</option>
+          <option value="parent">Parent</option>
+          <option value="teacher">Teacher</option>
+        </select>
+        <span>{accountTypeMessage}</span>
+        <br />
+        <button type="submit" onClick={handleSignup}>Sign Up</button>
+        <p>{successMessage}</p>
+      </form>
+    </div>
   );
 }
