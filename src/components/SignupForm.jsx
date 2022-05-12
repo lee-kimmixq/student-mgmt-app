@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export default function SignupForm() {
   const [username, setUsername] = useState('');
+  const [usernameMessage, setUsernameMessage] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [accountType, setAccountType] = useState('parent');
@@ -10,6 +11,12 @@ export default function SignupForm() {
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
+  };
+
+  const checkValidUsername = async () => {
+    const { data } = await axios.get(`/signup/check-username?username=${username}`, { username });
+    const message = data.isValidUsername ? 'Valid username' : 'Username already taken';
+    setUsernameMessage(message);
   };
 
   const handlePasswordChange = (e) => {
@@ -41,7 +48,8 @@ export default function SignupForm() {
   return (
     <form>
       <label htmlFor="username">Username:</label>
-      <input type="text" id="username" onChange={handleUsernameChange} />
+      <input type="text" id="username" onChange={handleUsernameChange} onBlur={checkValidUsername} />
+      <span>{usernameMessage}</span>
       <br />
       <label htmlFor="password">Password:</label>
       <input type="password" id="password" onChange={handlePasswordChange} />

@@ -39,7 +39,18 @@ export default function initUserController(db) {
     }
   };
 
+  const checkUsername = async (req, res) => {
+    try {
+      const { username } = req.query;
+      const numUsers = await db.User.count({ where: { username } });
+
+      res.send({ isValidUsername: numUsers === 0 });
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
   return {
-    login, signup,
+    login, signup, checkUsername,
   };
 }

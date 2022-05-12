@@ -13,6 +13,7 @@ export default function routes(app) {
     res.send({});
   });
   app.post('/signup', UserController.signup);
+  app.get('/signup/check-username', UserController.checkUsername);
 
   // Root route renders Webpack-generated main.html file
   app.get('/', (_, res) => {
