@@ -5,10 +5,12 @@ import checkAuth from './middleware/checkAuth.mjs';
 
 import initUserController from './controllers/users.mjs';
 import initContractController from './controllers/contracts.mjs';
+import initLessonController from './controllers/lessons.mjs';
 
 export default function routes(app) {
   const UserController = initUserController(db);
   const ContractController = initContractController(db);
+  const LessonController = initLessonController(db);
 
   app.post('/login', UserController.login);
   app.delete('/logout', (_, res) => {
@@ -20,6 +22,8 @@ export default function routes(app) {
   app.get('/signup/check-username', UserController.checkUsername);
 
   app.get('/students', ContractController.getStudents);
+
+  app.get('/lessons', LessonController.getLessons);
 
   app.get('/checkAuth', checkAuth);
 
