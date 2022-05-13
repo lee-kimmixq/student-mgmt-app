@@ -1,6 +1,8 @@
 import { resolve } from 'path';
 import db from './models/index.mjs';
 
+import checkAuth from './middleware/checkAuth.mjs';
+
 import initUserController from './controllers/users.mjs';
 
 export default function routes(app) {
@@ -14,6 +16,8 @@ export default function routes(app) {
   });
   app.post('/signup', UserController.signup);
   app.get('/signup/check-username', UserController.checkUsername);
+
+  app.get('/checkAuth', checkAuth);
 
   // Root route renders Webpack-generated main.html file
   app.get('/', (_, res) => {
