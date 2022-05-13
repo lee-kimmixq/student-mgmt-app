@@ -25,7 +25,7 @@ module.exports = {
       },
       status: {
         allowNull: false,
-        type: Sequelize.ENUM('requested', 'accepted', 'rejected'),
+        type: Sequelize.ENUM('requested', 'accepted', 'rejected', 'inactive'),
       },
       student_name: {
         type: Sequelize.STRING,

@@ -26,7 +26,7 @@ export default function initContractModel(sequelize, DataTypes) {
       },
       status: {
         allowNull: false,
-        type: DataTypes.ENUM('requested', 'accepted', 'rejected'),
+        type: DataTypes.ENUM('requested', 'accepted', 'rejected', 'inactive'),
         defaultValue: 'requested',
       },
       studentName: {
