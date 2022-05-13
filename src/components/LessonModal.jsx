@@ -1,8 +1,23 @@
 import React, { useState } from 'react';
 import moment from 'moment';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function LessonModal({ lesson }) {
   const [isVisible, setIsVisible] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleDelete = async () => {
+    try {
+      const { data } = await axios.delete(`/lesson/${lesson.id}`);
+      if (data.success) {
+        navigate('/');
+      }
+    } catch (err) {
+      console.log(err.response.data);
+    }
+  };
 
   if (isVisible) {
     return (
@@ -35,6 +50,7 @@ export default function LessonModal({ lesson }) {
               {' '}
               {moment(lesson.updatedAt).fromNow()}
             </p>
+            <button type="button" onClick={handleDelete}>Delete</button>
           </div>
         </div>
       </div>
