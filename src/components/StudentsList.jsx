@@ -11,7 +11,7 @@ export default function StudentsList() {
     } catch (err) {
       console.log(err.response.data);
     }
-  });
+  }, []);
 
   const studentsList = students.map((student) => (
     <li key={student.id}>
