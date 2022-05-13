@@ -22,6 +22,7 @@ export default function routes(app) {
   app.get('/signup/check-username', UserController.checkUsername);
 
   app.get('/students', ContractController.getStudents);
+  app.get('/students/active', ContractController.getActiveStudents);
 
   app.get('/lessons', LessonController.getLessons);
 

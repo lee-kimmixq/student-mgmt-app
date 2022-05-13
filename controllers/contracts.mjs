@@ -18,7 +18,24 @@ export default function initContractController(db) {
     }
   };
 
+  const getActiveStudents = async (req, res) => {
+    try {
+      const { userId } = req.cookies;
+      const parents = await db.Contract.findAll({
+        where: { teacherId: userId, status: 'accepted' },
+        include: { as: 'parent', model: db.User },
+      });
+      const students = parents.map((el) => ({
+        id: el.id,
+        studentName: el.studentName,
+      }));
+      res.send(students);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
   return {
-    getStudents,
+    getStudents, getActiveStudents,
   };
 }
