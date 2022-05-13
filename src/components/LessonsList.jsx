@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 
+import LessonModal from './LessonModal.jsx';
+
 export default function LessonsList() {
   const [lessons, setLessons] = useState([]);
 
@@ -17,11 +19,12 @@ export default function LessonsList() {
 
   const lessonsList = lessons.map((lesson) => (
     <li key={lesson.id}>
-      {lesson.studentName}
+      {moment(lesson.lessonDate).format('MMM Do YYYY')}
       {' '}
       |
       {' '}
-      {moment(lesson.lessonDate).format('MMM Do YYYY')}
+      {lesson.studentName}
+      <LessonModal lesson={lesson} />
     </li>
   ));
 
