@@ -23,7 +23,23 @@ export default function initLessonController(db) {
     }
   };
 
+  const postLesson = async (req, res) => {
+    try {
+      const {
+        studentId, details, date,
+      } = req.body;
+      await db.Lesson.create({
+        contractId: studentId,
+        details,
+        lessonDate: date,
+      });
+      res.send({ success: true });
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
   return {
-    getLessons,
+    getLessons, postLesson,
   };
 }

@@ -25,6 +25,7 @@ export default function routes(app) {
   app.get('/students/active', ContractController.getActiveStudents);
 
   app.get('/lessons', LessonController.getLessons);
+  app.post('/lessons', LessonController.postLesson);
 
   app.get('/checkAuth', checkAuth);
 
