@@ -4,9 +4,11 @@ import db from './models/index.mjs';
 import checkAuth from './middleware/checkAuth.mjs';
 
 import initUserController from './controllers/users.mjs';
+import initContractController from './controllers/contracts.mjs';
 
 export default function routes(app) {
   const UserController = initUserController(db);
+  const ContractController = initContractController(db);
 
   app.post('/login', UserController.login);
   app.delete('/logout', (_, res) => {
@@ -16,6 +18,8 @@ export default function routes(app) {
   });
   app.post('/signup', UserController.signup);
   app.get('/signup/check-username', UserController.checkUsername);
+
+  app.get('/students', ContractController.getStudents);
 
   app.get('/checkAuth', checkAuth);
 
