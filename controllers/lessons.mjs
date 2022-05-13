@@ -39,7 +39,19 @@ export default function initLessonController(db) {
     }
   };
 
+  const deleteLesson = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const lesson = await db.Lesson.findOne({ where: { id } });
+      // TODO: error dealing
+      lesson.destroy();
+      res.send({ success: true });
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
   return {
-    getLessons, postLesson,
+    getLessons, postLesson, deleteLesson,
   };
 }

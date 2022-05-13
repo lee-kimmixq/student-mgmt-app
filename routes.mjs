@@ -26,6 +26,7 @@ export default function routes(app) {
 
   app.get('/lessons', LessonController.getLessons);
   app.post('/lessons', LessonController.postLesson);
+  app.delete('/lesson/:id', LessonController.deleteLesson);
 
   app.get('/checkAuth', checkAuth);
 
