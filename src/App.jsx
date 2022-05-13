@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import LoginMain from './components/LoginMain.jsx';
-import LogoutButton from './components/LogoutButton.jsx';
+import Dashboard from './components/Dashboard.jsx';
 
 export default function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -21,12 +21,7 @@ export default function App() {
     <BrowserRouter>
       <div>
         {!isUserLoggedIn && <LoginMain setIsUserLoggedIn={setIsUserLoggedIn} />}
-        {isUserLoggedIn && (
-        <div>
-          Logged In
-          <LogoutButton setIsUserLoggedIn={setIsUserLoggedIn} />
-        </div>
-        )}
+        {isUserLoggedIn && <Dashboard />}
       </div>
     </BrowserRouter>
   );
