@@ -3,6 +3,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 import LessonEditForm from './LessonEditForm.jsx';
+import CommentForm from './CommentForm.jsx';
 
 export default function LessonDetails({ lesson }) {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -67,6 +68,7 @@ export default function LessonDetails({ lesson }) {
       <div>
         {commentsList}
       </div>
+      <CommentForm lesson={lesson} />
     </div>
   );
 }
