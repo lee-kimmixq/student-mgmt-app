@@ -4,6 +4,7 @@ import allConfig from '../db/config/config.js';
 import initContractModel from './contract.mjs';
 import initUserModel from './user.mjs';
 import initLessonModel from './lesson.mjs';
+import initCommentModel from './comment.mjs';
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -36,6 +37,7 @@ if (env === 'production') {
 db.User = initUserModel(sequelize, Sequelize.DataTypes);
 db.Contract = initContractModel(sequelize, Sequelize.DataTypes);
 db.Lesson = initLessonModel(sequelize, Sequelize.DataTypes);
+db.Comment = initCommentModel(sequelize, Sequelize.DataTypes);
 
 db.Contract.hasMany(db.Lesson);
 db.Lesson.belongsTo(db.Contract);
@@ -59,6 +61,11 @@ db.Contract.belongsTo(db.User, {
   as: 'parent',
   foreignKey: 'parentId',
 });
+
+db.User.hasMany(db.Comment);
+db.Comment.belongsTo(db.User);
+db.Lesson.hasMany(db.Comment);
+db.Comment.belongsTo(db.Lesson);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
