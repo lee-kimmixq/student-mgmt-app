@@ -6,11 +6,13 @@ import checkAuth from './middleware/checkAuth.mjs';
 import initUserController from './controllers/users.mjs';
 import initContractController from './controllers/contracts.mjs';
 import initLessonController from './controllers/lessons.mjs';
+import initCommentController from './controllers/comments.mjs';
 
 export default function routes(app) {
   const UserController = initUserController(db);
   const ContractController = initContractController(db);
   const LessonController = initLessonController(db);
+  const CommentController = initCommentController(db);
 
   app.post('/login', UserController.login);
   app.delete('/logout', (_, res) => {
@@ -28,6 +30,8 @@ export default function routes(app) {
   app.post('/lessons', LessonController.postLesson);
   app.put('/lesson/:id', LessonController.updateLesson);
   app.delete('/lesson/:id', LessonController.deleteLesson);
+
+  app.get('/lesson/:id/comments', CommentController.getComments);
 
   app.get('/checkAuth', checkAuth);
 
