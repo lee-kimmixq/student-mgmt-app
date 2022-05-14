@@ -11,6 +11,7 @@ export default function initLessonController(db) {
       });
       const lessonsArr = lessons.map((el) => ({
         id: el.id,
+        contractId: el.contract.id,
         studentName: el.contract.studentName,
         details: el.details,
         lessonDate: el.lessonDate,
@@ -51,7 +52,26 @@ export default function initLessonController(db) {
     }
   };
 
+  const updateLesson = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const {
+        studentId, details, date,
+      } = req.body;
+      const lesson = await db.Lesson.findOne({ where: { id } });
+      // TODO: error dealing
+      lesson.update({
+        contractId: studentId,
+        details,
+        lessonDate: date,
+      });
+      res.send({ success: true });
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
   return {
-    getLessons, postLesson, deleteLesson,
+    getLessons, postLesson, deleteLesson, updateLesson,
   };
 }
