@@ -33,6 +33,17 @@ export default function LessonDetails({ lesson }) {
     }
   }, []);
 
+  const handleDelete = async () => {
+    try {
+      const { data } = await axios.delete(`/lesson/${lesson.id}`);
+      if (data.success) {
+        // rerender
+      }
+    } catch (err) {
+      console.log(err.response.data);
+    }
+  };
+
   if (isEditMode) {
     return (
       <LessonEditForm lesson={lesson} setIsEditMode={setIsEditMode} />
@@ -64,6 +75,7 @@ export default function LessonDetails({ lesson }) {
         {moment(lesson.updatedAt).fromNow()}
       </p>
       <button type="button" onClick={() => { setIsEditMode(true); }}>Edit</button>
+      <button type="button" onClick={handleDelete}>Delete</button>
       <h4>Comments</h4>
       <div>
         {commentsList}
