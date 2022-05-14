@@ -3,6 +3,8 @@ import moment from 'moment';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import LessonDetails from './LessonDetails.jsx';
+
 export default function LessonModal({ lesson }) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -26,32 +28,8 @@ export default function LessonModal({ lesson }) {
           <button type="button" className="modal-close" onClick={() => setIsVisible(false)}>
             x
           </button>
-          <div>
-            <p>
-              Date:
-              {' '}
-              {moment(lesson.lessonDate).format('MMM Do YYYY HH:mm')}
-            </p>
-            <p>
-              Student:
-              {' '}
-              {lesson.studentName}
-            </p>
-            <p>
-              Details:
-              {' '}
-              {lesson.details}
-            </p>
-            <p>
-              Created
-              {' '}
-              {moment(lesson.createdAt).fromNow()}
-              , last edited
-              {' '}
-              {moment(lesson.updatedAt).fromNow()}
-            </p>
-            <button type="button" onClick={handleDelete}>Delete</button>
-          </div>
+          <LessonDetails lesson={lesson} />
+          <button type="button" onClick={handleDelete}>Delete</button>
         </div>
       </div>
     );
