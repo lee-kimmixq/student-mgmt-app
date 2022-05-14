@@ -10,7 +10,6 @@ export default function App() {
   useEffect(async () => {
     try {
       const { data } = await axios.get('/checkAuth');
-      console.log(data);
       setIsUserLoggedIn(data.login);
     } catch (err) {
       console.log(err.response.data);

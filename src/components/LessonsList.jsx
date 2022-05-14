@@ -10,7 +10,6 @@ export default function LessonsList() {
   useEffect(async () => {
     try {
       const { data } = await axios.get('/lessons');
-      console.log(data);
       setLessons(data);
     } catch (err) {
       console.log(err.response.data);

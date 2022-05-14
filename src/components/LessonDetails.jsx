@@ -12,7 +12,6 @@ export default function LessonDetails({ lesson }) {
   useEffect(async () => {
     try {
       const { data } = await axios.get(`/lesson/${lesson.id}/comments`);
-      console.log(data);
       const commentsJsx = data.map((comment) => (
         <div key={comment.id}>
           <p>
