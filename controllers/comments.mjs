@@ -22,7 +22,23 @@ export default function initCommentController(db) {
     }
   };
 
+  const postComment = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { userId } = req.cookies;
+      const { content } = req.body;
+      await db.Comment.create({
+        userId,
+        lessonId: id,
+        content,
+      });
+      res.send({ success: true });
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
   return {
-    getComments,
+    getComments, postComment,
   };
 }

@@ -32,6 +32,7 @@ export default function routes(app) {
   app.delete('/lesson/:id', LessonController.deleteLesson);
 
   app.get('/lesson/:id/comments', CommentController.getComments);
+  app.post('/lesson/:id/comments', CommentController.postComment);
 
   app.get('/checkAuth', checkAuth);
 
