@@ -3,14 +3,14 @@ import axios from 'axios';
 import moment from 'moment';
 import useSWR, { mutate } from 'swr';
 import fetcher from '../../utils/fetcher.mjs';
-
+import getLoginTokenCookie from '../../utils/getLoginTokenCookie.mjs';
 import LessonEditForm from './LessonEditForm.jsx';
 import CommentForm from './CommentForm.jsx';
 
 export default function LessonDetails({ lesson }) {
   const [isEditMode, setIsEditMode] = useState(false);
 
-  const { data, error } = useSWR(`/api/lesson/${lesson.id}/comments`, fetcher);
+  const { data, error } = useSWR([`/api/lesson/${lesson.id}/comments`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }], fetcher);
 
   if (error) return <div>error</div>;
   if (!data) return <div>loading</div>;
@@ -32,10 +32,10 @@ export default function LessonDetails({ lesson }) {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/api/lesson/${lesson.id}/comments`);
-      const response = await axios.delete(`/api/lesson/${lesson.id}`);
+      await axios.delete(`/api/lesson/${lesson.id}/comments`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
+      const response = await axios.delete(`/api/lesson/${lesson.id}`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
       if (response.data.success) {
-        mutate('/api/lessons');
+        mutate(['/api/lessons', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }]);
       }
     } catch (err) {
       console.log(err.response.data);

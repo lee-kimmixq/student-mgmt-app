@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+import getLoginTokenCookie from '../../utils/getLoginTokenCookie.mjs';
+
 export default function TeacherForm() {
   const [username, setUsername] = useState('');
   const [message, setMessage] = useState('');
@@ -12,13 +14,13 @@ export default function TeacherForm() {
 
   const addTeacher = async (id) => {
     try {
-      const { data } = await axios.post('api/students', { teacherId: id });
+      const { data } = await axios.post('api/students', { teacherId: id }, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
       if (!data.success) {
         setMessage(data.reason);
         setIdToAdd();
         return;
       }
-      setMessage('Sent request to teacher (not yet in backend)');
+      setMessage('Sent request to teacher');
       setIdToAdd();
     } catch (err) {
       console.log(err.response.data);
@@ -30,7 +32,7 @@ export default function TeacherForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.get(`/api/teacher?username=${username}`);
+      const { data } = await axios.get(`/api/teacher?username=${username}`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
       if (!data.found) {
         setMessage(`No teacher with username '${username}' found`);
         setIdToAdd();

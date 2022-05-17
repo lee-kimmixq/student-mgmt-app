@@ -2,18 +2,19 @@ import React from 'react';
 import useSWR, { mutate } from 'swr';
 import axios from 'axios';
 import fetcher from '../../utils/fetcher.mjs';
+import getLoginTokenCookie from '../../utils/getLoginTokenCookie.mjs';
 
 export default function StudentsList() {
-  const { data, error } = useSWR('/api/students', fetcher);
+  const { data, error } = useSWR(['/api/students', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }], fetcher);
 
   if (error) return <div>error</div>;
   if (!data) return <div>loading</div>;
 
   const changeStudentStatus = async (contractId, newStatus) => {
     try {
-      const response = await axios.post(`/api/student/${contractId}?status=${newStatus}`);
+      const response = await axios.post(`/api/student/${contractId}`, { status: newStatus }, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
       if (response.data.success) {
-        mutate('/api/students');
+        mutate(['/api/students', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }]);
       }
     } catch (err) {
       console.log(err.response.data);

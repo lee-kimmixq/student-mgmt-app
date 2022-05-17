@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import axios from 'axios';
 import { mutate } from 'swr';
+import getLoginTokenCookie from '../../utils/getLoginTokenCookie.mjs';
 
 export default function LessonDetails({ lesson, setIsEditMode }) {
   const [studentList, setStudentList] = useState([]);
@@ -14,7 +15,7 @@ export default function LessonDetails({ lesson, setIsEditMode }) {
 
   useEffect(async () => {
     try {
-      const { data } = await axios.get('/api/students/active');
+      const { data } = await axios.get(['/api/students/active', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }]);
       const studentsJsx = data.map((el) => (
         <option key={el.id} value={el.id}>
           {el.studentName}
@@ -63,10 +64,10 @@ export default function LessonDetails({ lesson, setIsEditMode }) {
     try {
       const { data } = await axios.put(`/api/lesson/${lesson.id}`, {
         studentId, details, date,
-      });
+      }, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
       if (data.success) {
         setIsEditMode(false);
-        mutate('/api/lessons');
+        mutate(['/api/lessons', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }]);
       }
     } catch (err) {
       console.log(err.response.data);

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import getLoginTokenCookie from '../../utils/getLoginTokenCookie.mjs';
 
 export default function LessonForm() {
   const [studentList, setStudentList] = useState([]);
@@ -13,7 +14,7 @@ export default function LessonForm() {
 
   useEffect(async () => {
     try {
-      const { data } = await axios.get('/api/students/active');
+      const { data } = await axios.get('/api/students/active', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
       const studentsJsx = data.map((el) => (
         <option key={el.id} value={el.id}>
           {el.studentName}
@@ -62,7 +63,7 @@ export default function LessonForm() {
     try {
       const { data } = await axios.post('/api/lessons', {
         studentId, details, date,
-      });
+      }, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
       if (data.success) {
         setSuccessMessage('Logged lesson successfully!');
         setStudentId('');
