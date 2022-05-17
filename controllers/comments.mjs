@@ -24,12 +24,12 @@ export default function initCommentController(db) {
 
   const postComment = async (req, res) => {
     try {
-      const { id } = req.params;
-      const { userId } = req.cookies;
+      const lessonId = req.params.id;
+      const userId = req.user.id;
       const { content } = req.body;
       await db.Comment.create({
         userId,
-        lessonId: id,
+        lessonId,
         content,
       });
       res.send({ success: true });

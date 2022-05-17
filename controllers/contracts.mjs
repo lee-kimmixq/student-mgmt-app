@@ -1,9 +1,9 @@
 export default function initContractController(db) {
   const getStudents = async (req, res) => {
     try {
-      const { userId } = req.cookies;
+      const { id } = req.user;
       const contracts = await db.Contract.findAll({
-        where: { teacherId: userId },
+        where: { teacherId: id },
         include: { as: 'parent', model: db.User },
       });
       const students = contracts.map((el) => ({
@@ -21,9 +21,9 @@ export default function initContractController(db) {
 
   const getActiveStudents = async (req, res) => {
     try {
-      const { userId } = req.cookies;
+      const { id } = req.user;
       const parents = await db.Contract.findAll({
-        where: { teacherId: userId, status: 'accepted' },
+        where: { teacherId: id, status: 'accepted' },
         include: { as: 'parent', model: db.User },
       });
       const students = parents.map((el) => ({
@@ -39,7 +39,7 @@ export default function initContractController(db) {
   const changeStudentStatus = async (req, res) => {
     try {
       const { id } = req.params;
-      const { status } = req.query;
+      const { status } = req.body;
       const contract = await db.Contract.findByPk(id);
       // TODO: error dealing
       contract.update({
@@ -55,11 +55,11 @@ export default function initContractController(db) {
   const postRequest = async (req, res) => {
     try {
       const { teacherId } = req.body;
-      const { userId } = req.cookies;
+      const { id } = req.user;
       const existingContract = await db.Contract.findOne({
         where: {
           teacherId,
-          parentId: userId,
+          parentId: id,
         },
       });
       if (existingContract) {
@@ -68,7 +68,7 @@ export default function initContractController(db) {
       }
       await db.Contract.create({
         teacherId,
-        parentId: userId,
+        parentId: id,
       });
       res.send({ success: true });
     } catch (err) {

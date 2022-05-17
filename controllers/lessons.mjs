@@ -1,12 +1,12 @@
 export default function initLessonController(db) {
   const getLessons = async (req, res) => {
     try {
-      const { userId } = req.cookies;
+      const { id } = req.user;
       const lessons = await db.Lesson.findAll({
         include: {
           as: 'contract',
           model: db.Contract,
-          where: { teacherId: userId },
+          where: { teacherId: id },
         },
       });
       const lessonsArr = lessons.map((el) => ({
