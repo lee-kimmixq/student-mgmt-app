@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { mutate } from 'swr';
 
 export default function CommentForm({ lesson }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,7 +20,8 @@ export default function CommentForm({ lesson }) {
     try {
       const { data } = await axios.post(`/lesson/${lesson.id}/comments`, { content });
       if (data.success) {
-        // rerender
+        setIsVisible(false);
+        mutate(`/lesson/${lesson.id}/comments`);
       }
     } catch (err) {
       console.log(err.response.data);

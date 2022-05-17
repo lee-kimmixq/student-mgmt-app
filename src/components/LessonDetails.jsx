@@ -1,42 +1,41 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
+import useSWR, { mutate } from 'swr';
+import fetcher from '../../utils/fetcher.mjs';
 
 import LessonEditForm from './LessonEditForm.jsx';
 import CommentForm from './CommentForm.jsx';
 
 export default function LessonDetails({ lesson }) {
   const [isEditMode, setIsEditMode] = useState(false);
-  const [commentsList, setCommentsList] = useState([]);
 
-  useEffect(async () => {
-    try {
-      const { data } = await axios.get(`/lesson/${lesson.id}/comments`);
-      const commentsJsx = data.map((comment) => (
-        <div key={comment.id}>
-          <p>
-            {comment.displayName}
-            :
-            {' '}
-            {comment.content}
-            {' '}
-            (
-            {moment(comment.createdAt).fromNow()}
-            )
-          </p>
-        </div>
-      ));
-      setCommentsList(commentsJsx);
-    } catch (err) {
-      console.log(err.response.data);
-    }
-  }, []);
+  const { data, error } = useSWR(`/lesson/${lesson.id}/comments`, fetcher);
+
+  if (error) return <div>error</div>;
+  if (!data) return <div>loading</div>;
+
+  const commentsList = data.map((comment) => (
+    <div key={comment.id}>
+      <p>
+        {comment.displayName}
+        :
+        {' '}
+        {comment.content}
+        {' '}
+        (
+        {moment(comment.createdAt).fromNow()}
+        )
+      </p>
+    </div>
+  ));
 
   const handleDelete = async () => {
     try {
-      const { data } = await axios.delete(`/lesson/${lesson.id}`);
-      if (data.success) {
-        // rerender
+      await axios.delete(`/lesson/${lesson.id}/comments`);
+      const response = await axios.delete(`/lesson/${lesson.id}`);
+      if (response.data.success) {
+        mutate('/lessons');
       }
     } catch (err) {
       console.log(err.response.data);
