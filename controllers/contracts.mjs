@@ -2,11 +2,11 @@ export default function initContractController(db) {
   const getStudents = async (req, res) => {
     try {
       const { userId } = req.cookies;
-      const parents = await db.Contract.findAll({
+      const contracts = await db.Contract.findAll({
         where: { teacherId: userId },
         include: { as: 'parent', model: db.User },
       });
-      const students = parents.map((el) => ({
+      const students = contracts.map((el) => ({
         id: el.id,
         studentName: el.studentName,
         lessonRate: el.lessonRate,
@@ -35,7 +35,23 @@ export default function initContractController(db) {
     }
   };
 
+  const changeStudentStatus = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { status } = req.query;
+      const contract = await db.Contract.findByPk(id);
+      // TODO: error dealing
+      contract.update({
+        status,
+        updatedAt: new Date(),
+      });
+      res.send({ success: true });
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
   return {
-    getStudents, getActiveStudents,
+    getStudents, getActiveStudents, changeStudentStatus,
   };
 }
