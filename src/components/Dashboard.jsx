@@ -6,15 +6,15 @@ import LessonsList from './LessonsList.jsx';
 import LessonForm from './LessonForm.jsx';
 import TeacherForm from './TeacherForm.jsx';
 
-export default function Dashboard({ setIsUserLoggedIn }) {
+export default function Dashboard({ setIsUserLoggedIn, accountType }) {
   return (
     <div>
-      Logged In
       <LogoutButton setIsUserLoggedIn={setIsUserLoggedIn} />
-      <Link to="/students">View List of Students</Link>
+      <br />
+      {accountType === 'teacher' && (<Link to="/students">View List of Students</Link>)}
       <Link to="/lessons">View List of Lesson Logs</Link>
-      <Link to="/new-lesson">Create Log</Link>
-      <Link to="/find-teacher">Add New Teacher</Link>
+      {accountType === 'teacher' && <Link to="/new-lesson">Create Log</Link>}
+      {accountType === 'parent' && <Link to="/find-teacher">Add New Teacher</Link>}
       <Routes>
         <Route path="students" element={<StudentsList />} />
         <Route path="lessons" element={<LessonsList />} />
