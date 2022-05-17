@@ -20,7 +20,7 @@ export default function App() {
     <BrowserRouter>
       <div>
         {!isUserLoggedIn && <LoginMain setIsUserLoggedIn={setIsUserLoggedIn} />}
-        {isUserLoggedIn && <Dashboard />}
+        {isUserLoggedIn && <Dashboard setIsUserLoggedIn={setIsUserLoggedIn} />}
       </div>
     </BrowserRouter>
   );
