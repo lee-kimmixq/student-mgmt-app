@@ -38,7 +38,17 @@ export default function initCommentController(db) {
     }
   };
 
+  const deleteComments = async (req, res) => {
+    try {
+      const { id } = req.params;
+      await db.Comment.destroy({ where: { lessonId: id } });
+      res.send({ success: true });
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
   return {
-    getComments, postComment,
+    getComments, postComment, deleteComments,
   };
 }
