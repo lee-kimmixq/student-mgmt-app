@@ -69,7 +69,12 @@ export default function initUserController(db) {
     }
   };
 
+  const getAuth = async (req, res) => {
+    const { accountType } = req.user;
+    res.send({ login: true, accountType });
+  };
+
   return {
-    login, signup, checkUsername, findTeacher,
+    login, signup, checkUsername, findTeacher, getAuth,
   };
 }

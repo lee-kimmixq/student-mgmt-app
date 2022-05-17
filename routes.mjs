@@ -22,6 +22,7 @@ export default function routes(app) {
   app.post('/api/signup', UserController.signup);
   app.get('/api/signup/check-username', UserController.checkUsername);
   app.get('/api/teacher', checkAuth, UserController.findTeacher);
+  app.get('/api/getAuth', checkAuth, UserController.getAuth);
 
   app.get('/api/students', checkAuth, ContractController.getStudents);
   app.post('/api/students', checkAuth, ContractController.postRequest);
