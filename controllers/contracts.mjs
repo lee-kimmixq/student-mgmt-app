@@ -8,6 +8,7 @@ export default function initContractController(db) {
       });
       const students = contracts.map((el) => ({
         id: el.id,
+        parentName: el.parent.username,
         studentName: el.studentName,
         lessonRate: el.lessonRate,
         status: el.status,

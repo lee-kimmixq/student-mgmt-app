@@ -30,7 +30,10 @@ export default function StudentsList() {
 
   const studentsList = data.map((student) => (
     <li key={student.id}>
+      {student.parentName}
+      (
       {student.studentName}
+      )
       {' '}
       | $
       {student.lessonRate}
