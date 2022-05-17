@@ -74,6 +74,7 @@ export default function LoginForm({ setIsUserLoggedIn }) {
                 <input
                   type="text"
                   id="username"
+                  value={username}
                   onChange={handleUsernameChange}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter username"
@@ -89,6 +90,7 @@ export default function LoginForm({ setIsUserLoggedIn }) {
                 <input
                   type={passwordType}
                   id="password"
+                  value={password}
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder="Enter password"
                   onChange={handlePasswordChange}
