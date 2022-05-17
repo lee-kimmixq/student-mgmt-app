@@ -51,7 +51,31 @@ export default function initContractController(db) {
     }
   };
 
+  const postRequest = async (req, res) => {
+    try {
+      const { teacherId } = req.body;
+      const { userId } = req.cookies;
+      const existingContract = await db.Contract.findOne({
+        where: {
+          teacherId,
+          parentId: userId,
+        },
+      });
+      if (existingContract) {
+        res.send({ success: false, reason: 'You have already added this teacher' });
+        return;
+      }
+      await db.Contract.create({
+        teacherId,
+        parentId: userId,
+      });
+      res.send({ success: true });
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
   return {
-    getStudents, getActiveStudents, changeStudentStatus,
+    getStudents, getActiveStudents, changeStudentStatus, postRequest,
   };
 }
