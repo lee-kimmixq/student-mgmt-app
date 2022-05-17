@@ -12,8 +12,13 @@ export default function TeacherForm() {
 
   const addTeacher = async (id) => {
     try {
-      // axios
-      setMessage('Sent request to teacher');
+      const { data } = await axios.post('api/students', { teacherId: id });
+      if (!data.success) {
+        setMessage(data.reason);
+        setIdToAdd();
+        return;
+      }
+      setMessage('Sent request to teacher (not yet in backend)');
       setIdToAdd();
     } catch (err) {
       console.log(err.response.data);
