@@ -12,7 +12,8 @@ export default function CommentForm({ lesson }) {
     setContent(e.target.value);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     if (content === '') {
       setContentMessage('Please type something');
       return;
@@ -20,6 +21,7 @@ export default function CommentForm({ lesson }) {
     try {
       const { data } = await axios.post(`/lesson/${lesson.id}/comments`, { content });
       if (data.success) {
+        setContent('');
         setIsVisible(false);
         mutate(`/lesson/${lesson.id}/comments`);
       }
