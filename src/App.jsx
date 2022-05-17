@@ -1,9 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
 import LoginMain from './components/LoginMain.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import getLoginTokenCookie from '../utils/getLoginTokenCookie.mjs';
+
+library.add(fas, far);
 
 export default function App() {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
