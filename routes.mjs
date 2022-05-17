@@ -14,28 +14,28 @@ export default function routes(app) {
   const LessonController = initLessonController(db);
   const CommentController = initCommentController(db);
 
-  app.post('/login', UserController.login);
-  app.delete('/logout', (_, res) => {
+  app.post('/api/login', UserController.login);
+  app.delete('/api/logout', (_, res) => {
     res.clearCookie('userId');
     res.clearCookie('loggedInHash');
     res.send({});
   });
-  app.post('/signup', UserController.signup);
-  app.get('/signup/check-username', UserController.checkUsername);
+  app.post('/api/signup', UserController.signup);
+  app.get('/api/signup/check-username', UserController.checkUsername);
 
-  app.get('/students', ContractController.getStudents);
-  app.get('/students/active', ContractController.getActiveStudents);
+  app.get('/api/students', ContractController.getStudents);
+  app.get('/api/students/active', ContractController.getActiveStudents);
 
-  app.get('/lessons', LessonController.getLessons);
-  app.post('/lessons', LessonController.postLesson);
-  app.put('/lesson/:id', LessonController.updateLesson);
-  app.delete('/lesson/:id', LessonController.deleteLesson);
+  app.get('/api/lessons', LessonController.getLessons);
+  app.post('/api/lessons', LessonController.postLesson);
+  app.put('/api/lesson/:id', LessonController.updateLesson);
+  app.delete('/api/lesson/:id', LessonController.deleteLesson);
 
-  app.get('/lesson/:id/comments', CommentController.getComments);
-  app.post('/lesson/:id/comments', CommentController.postComment);
-  app.delete('/lesson/:id/comments', CommentController.deleteComments);
+  app.get('/api/lesson/:id/comments', CommentController.getComments);
+  app.post('/api/lesson/:id/comments', CommentController.postComment);
+  app.delete('/api/lesson/:id/comments', CommentController.deleteComments);
 
-  app.get('/checkAuth', checkAuth);
+  app.get('/api/checkAuth', checkAuth);
 
   // Root route renders Webpack-generated main.html file
   app.get('/', (_, res) => {

@@ -19,11 +19,11 @@ export default function CommentForm({ lesson }) {
       return;
     }
     try {
-      const { data } = await axios.post(`/lesson/${lesson.id}/comments`, { content });
+      const { data } = await axios.post(`/api/lesson/${lesson.id}/comments`, { content });
       if (data.success) {
         setContent('');
         setIsVisible(false);
-        mutate(`/lesson/${lesson.id}/comments`);
+        mutate(`/api/lesson/${lesson.id}/comments`);
       }
     } catch (err) {
       console.log(err.response.data);

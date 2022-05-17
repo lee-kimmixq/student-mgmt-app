@@ -14,7 +14,7 @@ export default function LessonDetails({ lesson, setIsEditMode }) {
 
   useEffect(async () => {
     try {
-      const { data } = await axios.get('/students/active');
+      const { data } = await axios.get('/api/students/active');
       const studentsJsx = data.map((el) => (
         <option key={el.id} value={el.id}>
           {el.studentName}
@@ -61,12 +61,12 @@ export default function LessonDetails({ lesson, setIsEditMode }) {
     e.preventDefault();
     if (checkBlank()) return;
     try {
-      const { data } = await axios.put(`/lesson/${lesson.id}`, {
+      const { data } = await axios.put(`/api/lesson/${lesson.id}`, {
         studentId, details, date,
       });
       if (data.success) {
         setIsEditMode(false);
-        mutate('/lessons');
+        mutate('/api/lessons');
       }
     } catch (err) {
       console.log(err.response.data);

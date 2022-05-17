@@ -6,7 +6,7 @@ export default function StudentsList() {
 
   useEffect(async () => {
     try {
-      const { data } = await axios.get('/students');
+      const { data } = await axios.get('/api/students');
       setStudents(data);
     } catch (err) {
       console.log(err.response.data);

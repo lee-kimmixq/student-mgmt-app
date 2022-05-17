@@ -17,7 +17,7 @@ export default function LoginForm({ setIsUserLoggedIn }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post('/login', { username, password });
+      const { data } = await axios.post('/api/login', { username, password });
       if (data.login === true) {
         setIsUserLoggedIn(true);
       }

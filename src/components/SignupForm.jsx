@@ -19,7 +19,7 @@ export default function SignupForm() {
   };
 
   const checkValidUsername = async () => {
-    const { data } = await axios.get(`/signup/check-username?username=${username}`, { username });
+    const { data } = await axios.get(`/api/signup/check-username?username=${username}`, { username });
     const message = data.isValidUsername ? 'Valid username' : 'Username already taken';
     setUsernameMessage(message);
   };
@@ -74,7 +74,7 @@ export default function SignupForm() {
     e.preventDefault();
     if (checkBlank() || !checkPasswordMatch()) return;
     try {
-      const { data } = await axios.post('/signup', {
+      const { data } = await axios.post('/api/signup', {
         username, password, displayName, accountType,
       });
       if (data.signup) {

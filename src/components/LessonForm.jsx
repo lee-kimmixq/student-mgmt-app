@@ -13,7 +13,7 @@ export default function LessonForm() {
 
   useEffect(async () => {
     try {
-      const { data } = await axios.get('/students/active');
+      const { data } = await axios.get('/api/students/active');
       const studentsJsx = data.map((el) => (
         <option key={el.id} value={el.id}>
           {el.studentName}
@@ -60,7 +60,7 @@ export default function LessonForm() {
     e.preventDefault();
     if (checkBlank()) return;
     try {
-      const { data } = await axios.post('/lessons', {
+      const { data } = await axios.post('/api/lessons', {
         studentId, details, date,
       });
       if (data.success) {

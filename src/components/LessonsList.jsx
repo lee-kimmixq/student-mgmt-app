@@ -6,7 +6,7 @@ import fetcher from '../../utils/fetcher.mjs';
 import LessonModal from './LessonModal.jsx';
 
 export default function LessonsList() {
-  const { data, error } = useSWR('/lessons', fetcher);
+  const { data, error } = useSWR('/api/lessons', fetcher);
 
   if (error) return <div>error</div>;
   if (!data) return <div>loading</div>;

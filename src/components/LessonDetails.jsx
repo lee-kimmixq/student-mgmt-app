@@ -10,7 +10,7 @@ import CommentForm from './CommentForm.jsx';
 export default function LessonDetails({ lesson }) {
   const [isEditMode, setIsEditMode] = useState(false);
 
-  const { data, error } = useSWR(`/lesson/${lesson.id}/comments`, fetcher);
+  const { data, error } = useSWR(`/api/lesson/${lesson.id}/comments`, fetcher);
 
   if (error) return <div>error</div>;
   if (!data) return <div>loading</div>;
@@ -32,10 +32,10 @@ export default function LessonDetails({ lesson }) {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/lesson/${lesson.id}/comments`);
-      const response = await axios.delete(`/lesson/${lesson.id}`);
+      await axios.delete(`/api/lesson/${lesson.id}/comments`);
+      const response = await axios.delete(`/api/lesson/${lesson.id}`);
       if (response.data.success) {
-        mutate('/lessons');
+        mutate('/api/lessons');
       }
     } catch (err) {
       console.log(err.response.data);
