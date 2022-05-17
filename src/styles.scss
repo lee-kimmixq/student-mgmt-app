@@ -1,10 +1,5 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
-
-body {
-  background-color: skyblue;
-}
 
 .modal-container {
   width: 100%;
@@ -25,3 +20,5 @@ body {
   top: 5px;
   right: 5px;
 }
+
+@tailwind utilities;

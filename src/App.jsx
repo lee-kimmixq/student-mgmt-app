@@ -21,10 +21,12 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div>
-        {!isUserLoggedIn && <LoginMain setIsUserLoggedIn={setIsUserLoggedIn} />}
-        {isUserLoggedIn
+      <div className="min-h-screen bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100">
+        <div className="container">
+          {!isUserLoggedIn && <LoginMain setIsUserLoggedIn={setIsUserLoggedIn} />}
+          {isUserLoggedIn
         && <Dashboard setIsUserLoggedIn={setIsUserLoggedIn} accountType={accountType} />}
+        </div>
       </div>
     </BrowserRouter>
   );
