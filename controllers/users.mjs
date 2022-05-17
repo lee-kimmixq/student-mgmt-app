@@ -50,7 +50,21 @@ export default function initUserController(db) {
     }
   };
 
+  const findTeacher = async (req, res) => {
+    try {
+      const { username } = req.query;
+      const teacher = await db.User.findOne({ where: { username, account_type: 'teacher' } });
+      if (!teacher) {
+        res.send({ found: false });
+        return;
+      }
+      res.send({ found: true, teacher });
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
   return {
-    login, signup, checkUsername,
+    login, signup, checkUsername, findTeacher,
   };
 }
