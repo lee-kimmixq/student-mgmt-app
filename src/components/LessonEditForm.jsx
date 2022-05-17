@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import axios from 'axios';
+import { mutate } from 'swr';
 
 export default function LessonDetails({ lesson, setIsEditMode }) {
   const [studentList, setStudentList] = useState([]);
@@ -65,6 +66,7 @@ export default function LessonDetails({ lesson, setIsEditMode }) {
       });
       if (data.success) {
         setIsEditMode(false);
+        mutate('/lessons');
       }
     } catch (err) {
       console.log(err.response.data);

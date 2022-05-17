@@ -1,22 +1,17 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import moment from 'moment';
+import useSWR from 'swr';
+import fetcher from '../../utils/fetcher.mjs';
 
 import LessonModal from './LessonModal.jsx';
 
 export default function LessonsList() {
-  const [lessons, setLessons] = useState([]);
+  const { data, error } = useSWR('/lessons', fetcher);
 
-  useEffect(async () => {
-    try {
-      const { data } = await axios.get('/lessons');
-      setLessons(data);
-    } catch (err) {
-      console.log(err.response.data);
-    }
-  }, []);
+  if (error) return <div>error</div>;
+  if (!data) return <div>loading</div>;
 
-  const lessonsList = lessons.map((lesson) => (
+  const lessonsList = data.map((lesson) => (
     <li key={lesson.id}>
       {moment(lesson.lessonDate).format('MMM Do YYYY')}
       {' '}
