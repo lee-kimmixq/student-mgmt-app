@@ -1,4 +1,5 @@
 import getHash from '../utils/getHash.mjs';
+import generateToken from '../utils/generateToken.mjs';
 
 export default function initUserController(db) {
   const login = async (req, res) => {
@@ -16,8 +17,12 @@ export default function initUserController(db) {
         return;
       }
 
-      res.cookie('loggedInHash', getHash(`${user.id}-${process.env.SALT}`));
-      res.cookie('userId', user.id);
+      const token = generateToken({
+        id: user.id,
+        username: user.username,
+        accountType: user.accountType,
+      });
+      res.cookie('loginToken', token);
       res.send({ login: true });
     } catch (err) {
       res.status(500).send(err);

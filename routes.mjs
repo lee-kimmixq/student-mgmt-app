@@ -16,8 +16,7 @@ export default function routes(app) {
 
   app.post('/api/login', UserController.login);
   app.delete('/api/logout', (_, res) => {
-    res.clearCookie('userId');
-    res.clearCookie('loggedInHash');
+    res.clearCookie('loginToken');
     res.send({});
   });
   app.post('/api/signup', UserController.signup);
@@ -38,7 +37,7 @@ export default function routes(app) {
   app.post('/api/lesson/:id/comments', CommentController.postComment);
   app.delete('/api/lesson/:id/comments', CommentController.deleteComments);
 
-  app.get('/api/checkAuth', checkAuth);
+  // app.get('/api/checkAuth', checkAuth);
 
   // Root route renders Webpack-generated main.html file
   app.get('/', (_, res) => {
