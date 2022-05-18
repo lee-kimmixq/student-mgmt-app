@@ -1,18 +1,16 @@
 import React from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
-import LogoutButton from './LogoutButton.jsx';
 import StudentsList from './StudentsList.jsx';
 import LessonsList from './LessonsList.jsx';
 import LessonForm from './LessonForm.jsx';
 import TeacherForm from './TeacherForm.jsx';
+import Navbar from './Navbar.jsx';
 
 export default function Dashboard({ setIsUserLoggedIn, accountType }) {
   return (
     <div>
-      <LogoutButton setIsUserLoggedIn={setIsUserLoggedIn} />
+      <Navbar setIsUserLoggedIn={setIsUserLoggedIn} accountType={accountType} />
       <br />
-      {accountType === 'teacher' && (<Link to="/students">View List of Students</Link>)}
-      <Link to="/lessons">View List of Lesson Logs</Link>
       {accountType === 'teacher' && <Link to="/new-lesson">Create Log</Link>}
       {accountType === 'parent' && <Link to="/find-teacher">Add New Teacher</Link>}
       <Routes>
