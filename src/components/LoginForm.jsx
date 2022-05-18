@@ -12,8 +12,7 @@ export default function LoginForm({ setIsUserLoggedIn }) {
   const [passwordMessage, setPasswordMessage] = useState('');
 
   const togglePasswordType = () => {
-    const newType = passwordType === 'password' ? 'text' : 'password';
-    setPasswordType(newType);
+    setPasswordType(passwordType === 'password' ? 'text' : 'password');
   };
 
   const handleUsernameChange = (e) => {
@@ -29,18 +28,14 @@ export default function LoginForm({ setIsUserLoggedIn }) {
   const handleLogin = async (e) => {
     e.preventDefault();
     setAlertVisibility('hidden');
-    if (username === '' || password === '') {
-      if (username === '') {
-        setUsernameMessage('Please fill in your username!');
-      }
-      if (password === '') {
-        setPasswordMessage('Please fill in your password!');
-      }
+    if (!username || !password) {
+      setUsernameMessage(username ? '' : 'Please fill in your username!');
+      setPasswordMessage(password ? '' : 'Please fill in your password!');
       return;
     }
     try {
       const { data } = await axios.post('/api/login', { username, password });
-      if (data.login === true) {
+      if (data.login) {
         setIsUserLoggedIn(true);
       }
     } catch (err) {
