@@ -39,7 +39,7 @@ export default function routes(app) {
   app.delete('/api/lesson/:id/comments', checkAuth, CommentController.deleteComments);
 
   // Root route renders Webpack-generated main.html file
-  app.get('/', (_, res) => {
+  app.get('/*', (_, res) => {
     res.sendFile(resolve('dist', 'main.html'));
   });
 }
