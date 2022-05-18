@@ -26,8 +26,8 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100">
-        <div className="container">
+      <div>
+        <div>
           {!isUserLoggedIn && <LoginMain setIsUserLoggedIn={setIsUserLoggedIn} />}
           {isUserLoggedIn
         && <Main setIsUserLoggedIn={setIsUserLoggedIn} accountType={accountType} />}
