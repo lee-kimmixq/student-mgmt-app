@@ -11,8 +11,6 @@ export default function Main({ setIsUserLoggedIn, accountType }) {
     <div>
       <Navbar setIsUserLoggedIn={setIsUserLoggedIn} accountType={accountType} />
       <br />
-      {accountType === 'teacher' && <Link to="/new-lesson">Create Log</Link>}
-      {accountType === 'parent' && <Link to="/find-teacher">Add New Teacher</Link>}
       <Routes>
         <Route path="students" element={<StudentsList />} />
         <Route path="lessons" element={<LessonsList />} />

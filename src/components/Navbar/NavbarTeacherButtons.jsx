@@ -1,33 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import LogoutButton from './LogoutButton.jsx';
 
-export default function NavbarTeacherButtons({ setIsUserLoggedIn }) {
+export default function NavbarTeacherButtons() {
   return (
-
-    <div className="flex items-center ml-8">
-      <div
-        className="flex items-center border-gray-100 divide-x divide-gray-100 border-x"
-      >
+    <ul tabIndex="0" className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+      <li>
         <Link to="/students">
-          <span className="block p-6 border-b-4 border-transparent hover:border-red-700">
-            <FontAwesomeIcon icon="fas fa-users" />
-          </span>
+          Students
         </Link>
-
+      </li>
+      <li>
         <Link to="/lessons">
-          <span className="block p-6 border-b-4 border-transparent hover:border-red-700">
-            <FontAwesomeIcon icon="fas fa-clipboard-list" />
-          </span>
+          Lessons
         </Link>
-
-        <span className="block p-6 border-b-4 border-transparent hover:border-red-700">
-          <FontAwesomeIcon icon="fas fa-circle-user" />
-        </span>
-
-        <LogoutButton setIsUserLoggedIn={setIsUserLoggedIn} />
-      </div>
-    </div>
+      </li>
+      <li><Link to="/new-lesson">Create New Log</Link></li>
+    </ul>
   );
 }

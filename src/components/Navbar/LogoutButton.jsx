@@ -9,16 +9,8 @@ export default function LogoutButton({ setIsUserLoggedIn }) {
   };
 
   return (
-    <span className="hidden sm:block">
-      <a
-        href="/"
-        className="block p-6 border-b-4 border-transparent hover:border-red-700"
-        onClick={handleLogout}
-      >
-        <FontAwesomeIcon icon="fas fa-door-open" />
-
-        <span className="sr-only">Logout</span>
-      </a>
-    </span>
+    <a onClick={handleLogout}>
+      Logout
+    </a>
   );
 }
