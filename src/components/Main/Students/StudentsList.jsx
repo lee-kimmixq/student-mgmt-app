@@ -12,7 +12,7 @@ export default function StudentsList() {
 
   const changeStudentStatus = async (contractId, newStatus) => {
     try {
-      const response = await axios.post(`/api/student/${contractId}`, { status: newStatus }, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
+      const response = await axios.put(`/api/student/${contractId}`, { status: newStatus }, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
       if (response.data.success) {
         mutate(['/api/students', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }]);
       }
