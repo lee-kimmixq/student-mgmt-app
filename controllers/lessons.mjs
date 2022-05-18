@@ -67,6 +67,7 @@ export default function initLessonController(db) {
         contractId: studentId,
         details,
         lessonDate: date,
+        updatedAt: new Date(),
       });
       res.send({ success: true });
     } catch (err) {
