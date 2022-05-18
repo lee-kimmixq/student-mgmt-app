@@ -47,67 +47,64 @@ export default function LoginForm({ setIsUserLoggedIn }) {
 
   return (
     <div>
-      <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
-        <div className="max-w-lg mx-auto">
-          <h1 className="text-2xl font-bold text-center text-indigo-600 sm:text-3xl">Con Brio</h1>
-
-          <p className="max-w-md mx-auto mt-4 text-center text-gray-500">
-            Some introduction text
-          </p>
-
-          <form action="" className="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl">
-            <p className="text-lg font-medium">Sign in to your account</p>
-
-            <div className={`${alertVisibility} p-4 text-red-700 border-l-4 border-red-700 bg-red-50`} role="alert">
-              <p className="text-sm font-medium">Wrong username or password!</p>
-            </div>
-
-            <div>
-              <label htmlFor="username" className="text-sm font-medium">Username</label>
-
-              <div className="relative mt-1">
+      <div className={`${alertVisibility} alert alert-error shadow-lg`}>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>Wrong username or password!</span>
+        </div>
+      </div>
+      <div className="hero min-h-screen bg-base-200">
+        <div className="hero-content flex-col lg:flex-row-reverse">
+          <div className="text-center lg:text-left">
+            <h1 className="text-5xl font-bold">Con Brio</h1>
+            <p className="py-6">Sign in to your account</p>
+          </div>
+          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div className="card-body">
+              <div className="form-control">
+                <label htmlFor="username" className="label">
+                  <span className="label-text">Username</span>
+                </label>
                 <input
                   type="text"
+                  placeholder="Enter username"
+                  className="input input-bordered"
                   id="username"
                   value={username}
                   onChange={handleUsernameChange}
-                  className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                  placeholder="Enter username"
                 />
+                <p className="text-xs italic text-rose-600 leading-8 indent-2">{usernameMessage}</p>
               </div>
-              <p className="text-xs italic text-rose-600 leading-8 indent-2">{usernameMessage}</p>
-            </div>
-
-            <div>
-              <label htmlFor="password" className="text-sm font-medium">Password</label>
-
-              <div className="relative mt-1">
-                <input
-                  type={passwordType}
-                  id="password"
-                  value={password}
-                  className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                  placeholder="Enter password"
-                  onChange={handlePasswordChange}
-                />
-
-                <button type="button" className="absolute inset-y-0 inline-flex items-center right-4" onClick={togglePasswordType}>
-                  <FontAwesomeIcon icon="far fa-eye" />
-                </button>
+              <div className="form-control">
+                <label htmlFor="password" className="label">
+                  <span className="label-text">Password</span>
+                </label>
+                <div className="relative">
+                  <input
+                    type={passwordType}
+                    id="password"
+                    value={password}
+                    className="input input-bordered"
+                    placeholder="Enter password"
+                    onChange={handlePasswordChange}
+                  />
+                  <button type="button" className="absolute top-1/4 right-3" onClick={togglePasswordType}>
+                    <FontAwesomeIcon icon="far fa-eye" />
+                  </button>
+                </div>
+                <p className="text-xs italic text-rose-600 leading-8 indent-2">{passwordMessage}</p>
               </div>
-              <p className="text-xs italic text-rose-600 leading-8 indent-2">{passwordMessage}</p>
+
+              <div className="form-control mt-6">
+                <button type="submit" className="btn btn-primary" onClick={handleLogin}>Login</button>
+              </div>
+              <p className="text-sm text-center text-gray-500">
+                No account?
+                {' '}
+                <u><Link to="/signup">Sign up</Link></u>
+              </p>
             </div>
-
-            <button type="submit" onClick={handleLogin} className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg">
-              Sign in
-            </button>
-
-            <p className="text-sm text-center text-gray-500">
-              No account?
-              {' '}
-              <u><Link to="/signup">Sign up</Link></u>
-            </p>
-          </form>
+          </div>
         </div>
       </div>
     </div>
