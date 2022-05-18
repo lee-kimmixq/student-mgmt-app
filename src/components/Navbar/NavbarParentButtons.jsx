@@ -12,28 +12,16 @@ export default function NavbarParentButtons({ setIsUserLoggedIn }) {
       >
 
         <Link to="/lessons">
-          <span>
-            <a
-              href="/lessons"
-              className="block p-6 border-b-4 border-transparent hover:border-red-700"
-            >
-              <FontAwesomeIcon icon="fas fa-clipboard-list" />
-
-              <span className="sr-only">Lessons</span>
-            </a>
+          <span className="block p-6 border-b-4 border-transparent hover:border-red-700">
+            <FontAwesomeIcon icon="fas fa-clipboard-list" />
           </span>
         </Link>
 
-        <span>
-          <a
-            href="/"
-            className="block p-6 border-b-4 border-transparent hover:border-red-700"
-          >
+        <Link to="/">
+          <span className="block p-6 border-b-4 border-transparent hover:border-red-700">
             <FontAwesomeIcon icon="fas fa-circle-user" />
-
-            <span className="sr-only">Profile</span>
-          </a>
-        </span>
+          </span>
+        </Link>
 
         <LogoutButton setIsUserLoggedIn={setIsUserLoggedIn} />
       </div>
