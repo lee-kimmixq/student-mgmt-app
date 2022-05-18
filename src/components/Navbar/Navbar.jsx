@@ -20,24 +20,6 @@ export default function NavBar({ setIsUserLoggedIn, accountType }) {
         </div>
 
         <div className="flex items-center justify-end flex-1">
-          <nav
-            className="hidden lg:uppercase lg:text-gray-500 lg:tracking-wide lg:font-bold lg:text-xs lg:space-x-4 lg:flex"
-          >
-            <a
-              href="/about"
-              className="block h-16 leading-[4rem] border-b-4 border-transparent hover:text-red-700 hover:border-current"
-            >
-              About
-            </a>
-
-            <a
-              href="/news"
-              className="block h-16 leading-[4rem] border-b-4 border-transparent hover:text-red-700 hover:border-current"
-            >
-              News
-            </a>
-          </nav>
-
           {accountType === 'teacher' && (<NavbarTeacherButtons setIsUserLoggedIn={setIsUserLoggedIn} />)}
           {accountType === 'parent' && (<NavbarParentButtons setIsUserLoggedIn={setIsUserLoggedIn} />)}
 
