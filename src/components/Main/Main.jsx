@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link, Routes, Route } from 'react-router-dom';
-import StudentsList from './StudentsList.jsx';
-import LessonsList from './LessonsList.jsx';
-import LessonForm from './LessonForm.jsx';
-import TeacherForm from './TeacherForm.jsx';
-import Navbar from './Navbar.jsx';
+import StudentsList from './Students/StudentsList.jsx';
+import LessonsList from './Lessons/LessonsList.jsx';
+import LessonForm from './Lessons/LessonForm.jsx';
+import TeacherForm from './Teachers/TeacherForm.jsx';
+import Navbar from '../Navbar/Navbar.jsx';
 
-export default function Dashboard({ setIsUserLoggedIn, accountType }) {
+export default function Main({ setIsUserLoggedIn, accountType }) {
   return (
     <div>
       <Navbar setIsUserLoggedIn={setIsUserLoggedIn} accountType={accountType} />

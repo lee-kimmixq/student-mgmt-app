@@ -4,8 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
-import LoginMain from './components/LoginMain.jsx';
-import Dashboard from './components/Dashboard.jsx';
+import LoginMain from './components/Login/LoginMain.jsx';
+import Main from './components/Main/Main.jsx';
 import getLoginTokenCookie from '../utils/getLoginTokenCookie.mjs';
 
 library.add(fas, far);
@@ -30,7 +30,7 @@ export default function App() {
         <div className="container">
           {!isUserLoggedIn && <LoginMain setIsUserLoggedIn={setIsUserLoggedIn} />}
           {isUserLoggedIn
-        && <Dashboard setIsUserLoggedIn={setIsUserLoggedIn} accountType={accountType} />}
+        && <Main setIsUserLoggedIn={setIsUserLoggedIn} accountType={accountType} />}
         </div>
       </div>
     </BrowserRouter>

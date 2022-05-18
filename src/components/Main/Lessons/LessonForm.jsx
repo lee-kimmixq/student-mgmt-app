@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import moment from 'moment';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { mutate } from 'swr';
-import getLoginTokenCookie from '../../utils/getLoginTokenCookie.mjs';
+import getLoginTokenCookie from '../../../../utils/getLoginTokenCookie.mjs';
 
-export default function LessonDetails({ lesson, setIsEditMode }) {
+export default function LessonForm() {
   const [studentList, setStudentList] = useState([]);
-  const [studentId, setStudentId] = useState(lesson.contractId);
+  const [studentId, setStudentId] = useState('');
   const [studentMessage, setStudentMessage] = useState('');
-  const [details, setDetails] = useState(lesson.details);
+  const [details, setDetails] = useState('');
   const [detailsMessage, setDetailsMessage] = useState('');
-  const [date, setDate] = useState(moment(lesson.lessonDate).format('YYYY-MM-DD'));
+  const [date, setDate] = useState('');
   const [dateMessage, setDateMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(async () => {
     try {
-      const { data } = await axios.get(['/api/students/active', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }]);
+      const { data } = await axios.get('/api/students/active', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
       const studentsJsx = data.map((el) => (
         <option key={el.id} value={el.id}>
           {el.studentName}
@@ -62,12 +61,14 @@ export default function LessonDetails({ lesson, setIsEditMode }) {
     e.preventDefault();
     if (checkBlank()) return;
     try {
-      const { data } = await axios.put(`/api/lesson/${lesson.id}`, {
+      const { data } = await axios.post('/api/lessons', {
         studentId, details, date,
       }, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
       if (data.success) {
-        setIsEditMode(false);
-        mutate(['/api/lessons', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }]);
+        setSuccessMessage('Logged lesson successfully!');
+        setStudentId('');
+        setDate('');
+        setDetails('');
       }
     } catch (err) {
       console.log(err.response.data);
@@ -92,8 +93,9 @@ export default function LessonDetails({ lesson, setIsEditMode }) {
         <textarea type="text" id="details" value={details} onChange={handleDetailsChange} />
         <span>{detailsMessage}</span>
         <br />
-        <button type="submit" onClick={handleSubmit}>Edit Lesson</button>
+        <button type="submit" onClick={handleSubmit}>Submit Lesson Log</button>
       </form>
+      {successMessage}
     </div>
   );
 }

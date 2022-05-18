@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import getLoginTokenCookie from '../../utils/getLoginTokenCookie.mjs';
+import getLoginTokenCookie from '../../../../utils/getLoginTokenCookie.mjs';
 
 export default function TeacherForm() {
   const [username, setUsername] = useState('');

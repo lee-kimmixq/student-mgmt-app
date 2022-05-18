@@ -1,8 +1,8 @@
 import React from 'react';
 import useSWR, { mutate } from 'swr';
 import axios from 'axios';
-import fetcher from '../../utils/fetcher.mjs';
-import getLoginTokenCookie from '../../utils/getLoginTokenCookie.mjs';
+import fetcher from '../../../../utils/fetcher.mjs';
+import getLoginTokenCookie from '../../../../utils/getLoginTokenCookie.mjs';
 
 export default function StudentsList() {
   const { data, error } = useSWR(['/api/students', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }], fetcher);

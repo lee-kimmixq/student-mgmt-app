@@ -1,8 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 import useSWR from 'swr';
-import fetcher from '../../utils/fetcher.mjs';
-import getLoginTokenCookie from '../../utils/getLoginTokenCookie.mjs';
+import fetcher from '../../../../utils/fetcher.mjs';
+import getLoginTokenCookie from '../../../../utils/getLoginTokenCookie.mjs';
 import LessonModal from './LessonModal.jsx';
 
 export default function LessonsList() {
