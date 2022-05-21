@@ -46,63 +46,68 @@ export default function LoginForm({ setIsUserLoggedIn }) {
   };
 
   return (
-    <div>
-      <div className={`absolute ${alertVisibility} alert alert-error shadow-lg`}>
+    <div className="relative hero bg-base-200">
+      <div className={`${alertVisibility} fixed inset-x-0 top-0 z-10 alert alert-error shadow-lg flex justify-center`}>
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <FontAwesomeIcon icon="fas fa-circle-xmark" />
           <span>Wrong username or password!</span>
         </div>
       </div>
-      <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col">
-          <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Con Brio</h1>
-          </div>
-          <div className="card w-full max-w-sm shadow-2xl bg-base-100">
-            <div className="card-body">
-              <div className="form-control">
-                <label htmlFor="username" className="label">
-                  <span className="label-text">Username</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter username"
-                  className="input input-bordered"
-                  id="username"
-                  value={username}
-                  onChange={handleUsernameChange}
-                />
-                <p className="text-xs italic text-rose-600 leading-8 indent-2">{usernameMessage}</p>
-              </div>
-              <div className="form-control">
-                <label htmlFor="password" className="label">
-                  <span className="label-text">Password</span>
-                </label>
-                <div className="relative">
-                  <input
-                    type={passwordType}
-                    id="password"
-                    value={password}
-                    className="input input-bordered"
-                    placeholder="Enter password"
-                    onChange={handlePasswordChange}
-                  />
-                  <button type="button" className="absolute top-1/4 right-3" onClick={togglePasswordType}>
-                    <FontAwesomeIcon icon="far fa-eye" />
-                  </button>
-                </div>
-                <p className="text-xs italic text-rose-600 leading-8 indent-2">{passwordMessage}</p>
-              </div>
 
-              <div className="form-control mt-6">
-                <button type="submit" className="btn btn-primary" onClick={handleLogin}>Login</button>
-              </div>
-              <p className="text-sm text-center text-gray-500">
-                No account?
-                {' '}
-                <u><Link to="/signup">Sign up</Link></u>
-              </p>
+      <div className="absolute top-20 hero-content flex-col">
+
+        <div className="text-center lg:text-left">
+          <h1 className="text-5xl font-bold">Con Brio</h1>
+        </div>
+
+        <div className="card w-full max-w-sm shadow-2xl bg-base-100">
+          <div className="card-body">
+
+            <div className="form-control">
+              <label htmlFor="username" className="label">
+                <span className="label-text">Username</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter username"
+                className="input input-bordered"
+                id="username"
+                value={username}
+                onChange={handleUsernameChange}
+              />
+              <p className="text-xs italic text-rose-600 leading-6 indent-2">{usernameMessage}</p>
             </div>
+
+            <div className="form-control">
+              <label htmlFor="password" className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <div className="relative">
+                <input
+                  type={passwordType}
+                  id="password"
+                  value={password}
+                  className="input input-bordered"
+                  placeholder="Enter password"
+                  onChange={handlePasswordChange}
+                />
+                <button type="button" className="absolute top-1/4 right-3" onClick={togglePasswordType}>
+                  <FontAwesomeIcon icon="far fa-eye" />
+                </button>
+              </div>
+              <p className="text-xs italic text-rose-600 leading-6 indent-2">{passwordMessage}</p>
+            </div>
+
+            <div className="form-control mt-6">
+              <button type="submit" className="btn btn-warning" onClick={handleLogin}>Login</button>
+            </div>
+
+            <p className="text-sm text-center text-gray-500">
+              No account?
+              {' '}
+              <u><Link to="/signup">Sign up</Link></u>
+            </p>
+
           </div>
         </div>
       </div>
