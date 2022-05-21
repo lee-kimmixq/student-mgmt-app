@@ -7,18 +7,14 @@ export default function LessonModal({ lesson }) {
 
   if (isVisible) {
     return (
-      <div className="modal-container">
-        <div className="modal">
-          <button type="button" className="modal-close" onClick={() => setIsVisible(false)}>
-            x
-          </button>
-          <LessonDetails lesson={lesson} />
-        </div>
+      <div>
+        <button htmlFor={`modal-${lesson.id}`} className="btn btn-sm btn-circle right-2 top-2" onClick={() => { setIsVisible(false); }}>✕</button>
+        <LessonDetails lesson={lesson} />
       </div>
     );
   }
   return (
-    <button type="button" onClick={() => setIsVisible(true)}>
+    <button type="button" className="btn" onClick={() => setIsVisible(true)}>
       View
     </button>
   );
