@@ -6,6 +6,7 @@ import LessonForm from './Lessons/LessonForm.jsx';
 import TeacherForm from './Teachers/TeacherForm.jsx';
 import Navbar from '../Navbar/Navbar.jsx';
 import TeachersList from './Teachers/TeachersList.jsx';
+import InvoicesList from './Invoices/InvoicesList.jsx';
 
 export default function Main({ setIsUserLoggedIn, accountType }) {
   return (
@@ -18,6 +19,7 @@ export default function Main({ setIsUserLoggedIn, accountType }) {
         <Route path="lessons" element={<LessonsList />} />
         <Route path="new-lesson" element={<LessonForm />} />
         <Route path="find-teacher" element={<TeacherForm />} />
+        <Route path="invoices" element={<InvoicesList />} />
       </Routes>
     </div>
   );
