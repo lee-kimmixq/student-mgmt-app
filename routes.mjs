@@ -7,12 +7,14 @@ import initUserController from './controllers/users.mjs';
 import initContractController from './controllers/contracts.mjs';
 import initLessonController from './controllers/lessons.mjs';
 import initCommentController from './controllers/comments.mjs';
+import initInvoiceController from './controllers/invoices.mjs';
 
 export default function routes(app) {
   const UserController = initUserController(db);
   const ContractController = initContractController(db);
   const LessonController = initLessonController(db);
   const CommentController = initCommentController(db);
+  const InvoiceController = initInvoiceController(db);
 
   app.post('/api/login', UserController.login);
   app.delete('/api/logout', (_, res) => {
@@ -38,6 +40,8 @@ export default function routes(app) {
   app.get('/api/lesson/:id/comments', checkAuth, CommentController.getComments);
   app.post('/api/lesson/:id/comments', checkAuth, CommentController.postComment);
   app.delete('/api/lesson/:id/comments', checkAuth, CommentController.deleteComments);
+
+  app.get('/api/invoices', checkAuth, InvoiceController.getInvoices);
 
   // Root route renders Webpack-generated main.html file
   app.get('/*', (_, res) => {
