@@ -76,7 +76,24 @@ export default function initContractController(db) {
     }
   };
 
+  const getTeachers = async (req, res) => {
+    try {
+      const { id } = req.user;
+      const contracts = await db.Contract.findAll({
+        where: { parentId: id },
+        include: { as: 'teacher', model: db.User },
+      });
+      const teachers = contracts.map((el) => ({
+        id: el.id,
+        teacherName: el.teacher.displayName,
+      }));
+      res.send(teachers);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
   return {
-    getStudents, getActiveStudents, changeStudentStatus, postRequest,
+    getStudents, getActiveStudents, changeStudentStatus, postRequest, getTeachers,
   };
 }

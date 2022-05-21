@@ -28,6 +28,7 @@ export default function routes(app) {
   app.post('/api/students', checkAuth, ContractController.postRequest);
   app.get('/api/students/active', checkAuth, ContractController.getActiveStudents);
   app.put('/api/student/:id', checkAuth, ContractController.changeStudentStatus);
+  app.get('/api/teachers', checkAuth, ContractController.getTeachers);
 
   app.get('/api/lessons', checkAuth, LessonController.getLessons);
   app.post('/api/lessons', checkAuth, LessonController.postLesson);
