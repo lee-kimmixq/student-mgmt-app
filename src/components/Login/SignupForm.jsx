@@ -14,7 +14,6 @@ export default function SignupForm() {
   const [accountType, setAccountType] = useState('');
   const [accountTypeMessage, setAccountTypeMessage] = useState('');
   const [successVisibility, setSuccessVisibility] = useState('hidden');
-  const [passwordType, setPasswordType] = useState('password');
 
   const handleUsernameChange = (e) => {
     setUsernameMessage('');
@@ -57,11 +56,6 @@ export default function SignupForm() {
   const handleAccountTypeChange = (e) => {
     setAccountTypeMessage('');
     setAccountType(e.target.id);
-  };
-
-  const togglePasswordType = () => {
-    const newType = passwordType === 'password' ? 'text' : 'password';
-    setPasswordType(newType);
   };
 
   const checkBlank = () => {
