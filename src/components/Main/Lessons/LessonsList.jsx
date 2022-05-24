@@ -12,21 +12,31 @@ export default function LessonsList() {
   if (!data) return <div>loading</div>;
 
   const lessonsList = data.map((lesson) => (
-    <li key={lesson.id}>
-      {moment(lesson.lessonDate).format('MMM Do YYYY')}
-      {' '}
-      |
-      {' '}
-      {lesson.studentName}
-      <LessonModal lesson={lesson} />
-    </li>
+    <tr key={lesson.id} className="hover">
+      <td>{moment(lesson.lessonDate).format('MMM Do YYYY')}</td>
+      <td>{lesson.studentName}</td>
+      <td>Blue</td>
+      <td>
+        <LessonModal lesson={lesson} />
+      </td>
+    </tr>
   ));
 
   return (
-    <div>
-      <ul>
-        {lessonsList}
-      </ul>
+    <div className="overflow-x-auto">
+      <table className="table table-zebra w-full">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Student</th>
+            <th>Comments</th>
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          {lessonsList}
+        </tbody>
+      </table>
     </div>
   );
 }

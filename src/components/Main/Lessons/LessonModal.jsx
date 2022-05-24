@@ -14,8 +14,6 @@ export default function LessonModal({ lesson }) {
     );
   }
   return (
-    <button type="button" className="btn" onClick={() => setIsVisible(true)}>
-      View
-    </button>
+    <button type="button" className="btn btn-warning btn-sm" onClick={() => setIsVisible(true)}>View</button>
   );
 }
