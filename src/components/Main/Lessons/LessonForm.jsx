@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { mutate } from 'swr';
 import getLoginTokenCookie from '../../../../utils/getLoginTokenCookie.mjs';
 
 export default function LessonForm() {
@@ -69,6 +70,7 @@ export default function LessonForm() {
         setStudentId('');
         setDate('');
         setDetails('');
+        mutate(['/api/lessons', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }]);
       }
     } catch (err) {
       console.log(err.response.data);

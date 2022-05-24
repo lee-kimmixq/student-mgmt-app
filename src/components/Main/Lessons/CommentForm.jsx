@@ -25,6 +25,7 @@ export default function CommentForm({ lesson }) {
         setContent('');
         setIsVisible(false);
         mutate([`/api/lesson/${lesson.id}/comments`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }]);
+        mutate([`/api/lesson/${lesson.id}/comment-data`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }]);
       }
     } catch (err) {
       console.log(err.response.data);
