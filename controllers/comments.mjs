@@ -48,7 +48,24 @@ export default function initCommentController(db) {
     }
   };
 
+  const getCommentData = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const commentCount = await db.Comment.count({
+        where: { lessonId: id },
+      });
+      const recentComment = await db.Comment.findOne({
+        attributes: ['createdAt'],
+        where: { lessonId: id },
+        order: [['createdAt', 'DESC']],
+      });
+      res.send({ commentCount, recentCommentDate: recentComment ? recentComment.createdAt : null });
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
   return {
-    getComments, postComment, deleteComments,
+    getComments, postComment, deleteComments, getCommentData,
   };
 }

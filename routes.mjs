@@ -40,6 +40,7 @@ export default function routes(app) {
   app.get('/api/lesson/:id/comments', checkAuth, CommentController.getComments);
   app.post('/api/lesson/:id/comments', checkAuth, CommentController.postComment);
   app.delete('/api/lesson/:id/comments', checkAuth, CommentController.deleteComments);
+  app.get('/api/lesson/:id/comment-data', checkAuth, CommentController.getCommentData);
 
   app.get('/api/invoices', checkAuth, InvoiceController.getInvoices);
 
