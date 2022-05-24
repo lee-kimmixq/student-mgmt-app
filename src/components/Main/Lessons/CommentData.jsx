@@ -11,8 +11,6 @@ export default function CommentData({ lessonId }) {
   if (commentsError) return <div>error</div>;
   if (!comments) return <div>loading</div>;
 
-  console.log(comments);
-
   return (
     <td>
       <FontAwesomeIcon icon="far fa-message" />
