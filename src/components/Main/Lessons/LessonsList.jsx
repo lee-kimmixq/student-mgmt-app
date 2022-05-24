@@ -4,18 +4,19 @@ import useSWR from 'swr';
 import fetcher from '../../../../utils/fetcher.mjs';
 import getLoginTokenCookie from '../../../../utils/getLoginTokenCookie.mjs';
 import LessonModal from './LessonModal.jsx';
+import CommentData from './CommentData.jsx';
 
 export default function LessonsList() {
-  const { data, error } = useSWR(['/api/lessons', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }], fetcher);
+  const { data: lessons, error: lessonsError } = useSWR(['/api/lessons', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }], fetcher);
 
-  if (error) return <div>error</div>;
-  if (!data) return <div>loading</div>;
+  if (lessonsError) return <div>error</div>;
+  if (!lessons) return <div>loading</div>;
 
-  const lessonsList = data.map((lesson) => (
+  const lessonsList = lessons.map((lesson) => (
     <tr key={lesson.id} className="hover">
       <td>{moment(lesson.lessonDate).format('MMM Do YYYY')}</td>
       <td>{lesson.studentName}</td>
-      <td>Blue</td>
+      <CommentData lessonId={lesson.id} />
       <td>
         <LessonModal lesson={lesson} />
       </td>
