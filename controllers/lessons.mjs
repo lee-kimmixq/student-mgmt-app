@@ -6,21 +6,31 @@ export default function initLessonController(db) {
       const whereObj = accountType === 'teacher' ? { teacherId: id } : { parentId: id };
 
       const lessons = await db.Lesson.findAll({
+        attributes: ['id', 'lessonDate'],
         include: {
-          as: 'contract',
           model: db.Contract,
           where: whereObj,
+          attributes: ['studentName', 'updatedAt'],
         },
       });
-      const lessonsArr = lessons.map((el) => ({
-        id: el.id,
-        contractId: el.contract.id,
-        studentName: el.contract.studentName,
-        details: el.details,
-        lessonDate: el.lessonDate,
-        createdAt: el.createdAt,
-        updatedAt: el.updatedAt,
-      }));
+
+      const lessonsArr = await Promise.all(
+        lessons.map(async (lesson) => ({
+          id: lesson.id,
+          contractId: lesson.contract.id,
+          studentName: lesson.contract.studentName,
+          lessonDate: lesson.lessonDate,
+          commentCount: await db.Comment.count({
+            where: { lessonId: lesson.id },
+          }),
+          recentCommentDate: await db.Comment.findOne({
+            attributes: ['createdAt'],
+            where: { lessonId: lesson.id },
+            order: [['createdAt', 'DESC']],
+          }),
+        })),
+      );
+
       res.send(lessonsArr);
     } catch (err) {
       res.status(500).send(err);
