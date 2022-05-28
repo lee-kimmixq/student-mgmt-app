@@ -5,30 +5,15 @@ import useSWR, { mutate } from 'swr';
 import fetcher from '../../../../utils/fetcher.mjs';
 import getLoginTokenCookie from '../../../../utils/getLoginTokenCookie.mjs';
 import LessonEditForm from './LessonEditForm.jsx';
-import CommentForm from './CommentForm.jsx';
+import CommentsList from './CommentsList.jsx';
 
-export default function LessonDetails({ lesson }) {
+export default function LessonDetails({ lessonId }) {
   const [isEditMode, setIsEditMode] = useState(false);
 
-  const { data, error } = useSWR([`/api/lesson/${lesson.id}/comments`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }], fetcher);
+  const { data: lesson, error } = useSWR([`/api/lesson/${lessonId}`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }], fetcher);
 
   if (error) return <div>error</div>;
-  if (!data) return <div>loading</div>;
-
-  const commentsList = data.map((comment) => (
-    <div key={comment.id}>
-      <p>
-        {comment.displayName}
-        :
-        {' '}
-        {comment.content}
-        {' '}
-        (
-        {moment(comment.createdAt).fromNow()}
-        )
-      </p>
-    </div>
-  ));
+  if (!lesson) return <div>loading</div>;
 
   const handleDelete = async () => {
     try {
@@ -74,11 +59,7 @@ export default function LessonDetails({ lesson }) {
       </p>
       <button type="button" onClick={() => { setIsEditMode(true); }}>Edit</button>
       <button type="button" onClick={handleDelete}>Delete</button>
-      <h4>Comments</h4>
-      <div>
-        {commentsList}
-      </div>
-      <CommentForm lesson={lesson} />
+      <CommentsList lessonId={lessonId} />
     </div>
   );
 }

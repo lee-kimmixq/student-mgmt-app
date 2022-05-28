@@ -25,7 +25,7 @@ export default function LessonsList() {
       && `(${moment(lesson.recentCommentDate.createdAt).fromNow()})` }
       </td>
       <td>
-        {/* <LessonModal lesson={lesson} /> */}
+        <LessonModal lessonId={lesson.id} />
       </td>
     </tr>
   ));

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { mutate } from 'swr';
 import getLoginTokenCookie from '../../../../utils/getLoginTokenCookie.mjs';
 
-export default function CommentForm({ lesson }) {
+export default function CommentForm({ lessonId }) {
   const [isVisible, setIsVisible] = useState(false);
 
   const [content, setContent] = useState('');
@@ -20,12 +20,12 @@ export default function CommentForm({ lesson }) {
       return;
     }
     try {
-      const { data } = await axios.post(`/api/lesson/${lesson.id}/comments`, { content }, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
+      const { data } = await axios.post(`/api/lesson/${lessonId}/comments`, { content }, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
       if (data.success) {
         setContent('');
         setIsVisible(false);
-        mutate([`/api/lesson/${lesson.id}/comments`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }]);
-        mutate([`/api/lesson/${lesson.id}/comment-data`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }]);
+        mutate([`/api/lesson/${lessonId}/comments`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }]);
+        mutate([`/api/lesson/${lessonId}/comment-data`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }]);
       }
     } catch (err) {
       console.log(err.response.data);
