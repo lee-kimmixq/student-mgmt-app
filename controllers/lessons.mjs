@@ -3,13 +3,13 @@ export default function initLessonController(db) {
     try {
       const { id, accountType } = req.user;
 
-      const whereObj = accountType === 'teacher' ? { teacherId: id } : { parentId: id };
+      const accountIdObj = accountType === 'teacher' ? { teacherId: id } : { parentId: id };
 
       const lessons = await db.Lesson.findAll({
         attributes: ['id', 'lessonDate'],
         include: {
           model: db.Contract,
-          where: whereObj,
+          where: accountIdObj,
           attributes: ['studentName', 'updatedAt'],
         },
       });
