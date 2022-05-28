@@ -37,6 +37,24 @@ export default function initLessonController(db) {
     }
   };
 
+  const getLessonDetails = async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      const lesson = await db.Lesson.findByPk(id, {
+        attributes: ['id', 'details', 'lessonDate', 'createdAt', 'updatedAt'],
+        include: {
+          model: db.Contract,
+          attributes: ['studentName'],
+        },
+      });
+
+      res.send(lesson);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
   const postLesson = async (req, res) => {
     try {
       const {
@@ -86,6 +104,6 @@ export default function initLessonController(db) {
   };
 
   return {
-    getLessons, postLesson, deleteLesson, updateLesson,
+    getLessons, getLessonDetails, postLesson, deleteLesson, updateLesson,
   };
 }

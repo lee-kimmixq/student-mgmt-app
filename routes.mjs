@@ -33,6 +33,7 @@ export default function routes(app) {
   app.get('/api/teachers', checkAuth, ContractController.getTeachers);
 
   app.get('/api/lessons', checkAuth, LessonController.getLessons);
+  app.get('/api/lesson/:id', checkAuth, LessonController.getLessonDetails);
   app.post('/api/lessons', checkAuth, LessonController.postLesson);
   app.put('/api/lesson/:id', checkAuth, LessonController.updateLesson);
   app.delete('/api/lesson/:id', checkAuth, LessonController.deleteLesson);
