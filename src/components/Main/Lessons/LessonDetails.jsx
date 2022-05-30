@@ -42,7 +42,7 @@ export default function LessonDetails({ lessonId }) {
       <p>
         Student:
         {' '}
-        {lesson.studentName}
+        {lesson.contract.studentName}
       </p>
       <p>
         Details:
