@@ -7,25 +7,11 @@ import getLoginTokenCookie from '../../../../utils/getLoginTokenCookie.mjs';
 import LessonEditForm from './LessonEditForm.jsx';
 import CommentsList from './CommentsList.jsx';
 
-export default function LessonDetails({ lessonId }) {
-  const [isEditMode, setIsEditMode] = useState(false);
-
+export default function LessonDetails({ lessonId, isEditMode, setIsEditMode }) {
   const { data: lesson, error } = useSWR([`/api/lesson/${lessonId}`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }], fetcher);
 
   if (error) return <div>error</div>;
   if (!lesson) return <div>loading</div>;
-
-  const handleDelete = async () => {
-    try {
-      await axios.delete(`/api/lesson/${lesson.id}/comments`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
-      const response = await axios.delete(`/api/lesson/${lesson.id}`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
-      if (response.data.success) {
-        mutate(['/api/lessons', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }]);
-      }
-    } catch (err) {
-      console.log(err.response.data);
-    }
-  };
 
   if (isEditMode) {
     return (
@@ -57,8 +43,7 @@ export default function LessonDetails({ lessonId }) {
         {' '}
         {moment(lesson.updatedAt).fromNow()}
       </p>
-      <button type="button" onClick={() => { setIsEditMode(true); }}>Edit</button>
-      <button type="button" onClick={handleDelete}>Delete</button>
+
       <CommentsList lessonId={lessonId} />
     </div>
   );
