@@ -15,7 +15,8 @@ export default function LessonDetails({ lesson, setIsEditMode }) {
 
   useEffect(async () => {
     try {
-      const { data } = await axios.get(['/api/students/active', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }]);
+      const { data } = await axios.get('/api/students/active', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
+      console.log(data);
       const studentsJsx = data.map((el) => (
         <option key={el.id} value={el.id}>
           {el.studentName}
