@@ -16,12 +16,13 @@ export default function LessonsList() {
 
   return (
     <div className="overflow-x-auto">
-      <table className="table table-zebra w-full">
+      <table className="table w-full">
         <thead>
           <tr>
             <th>Date</th>
             <th>Student</th>
             <th>Comments</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
