@@ -27,7 +27,7 @@ export default function TeacherForm() {
     }
   };
 
-  const addButton = (id) => <button type="button" onClick={() => { addTeacher(id); }}>Add Teacher</button>;
+  const addButton = (id) => <button type="button" className="btn btn-success btn-sm" onClick={() => { addTeacher(id); }}>Add Teacher</button>;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,10 +47,12 @@ export default function TeacherForm() {
 
   return (
     <form>
-      <input type="text" id="content" value={username} onChange={handleUsernameChange} />
-      <button type="submit" onClick={handleSubmit}>Find Teacher</button>
+      <div className="flex items-center mx-2">
+        <input type="text" id="name" className="input input-bordered" value={username} onChange={handleUsernameChange} />
+        <button type="submit" className="btn btn-md btn-warning" onClick={handleSubmit}> Find Teacher</button>
+      </div>
       <br />
-      <span>
+      <span className="mx-4">
         {message}
         {' '}
         {idToAdd && addButton(idToAdd)}
