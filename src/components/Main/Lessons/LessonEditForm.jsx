@@ -4,7 +4,7 @@ import axios from 'axios';
 import { mutate } from 'swr';
 import getLoginTokenCookie from '../../../../utils/getLoginTokenCookie.mjs';
 
-export default function LessonDetails({ lesson, setIsEditMode }) {
+export default function LessonEditForm({ lesson, setIsEditMode }) {
   const [studentList, setStudentList] = useState([]);
   const [studentId, setStudentId] = useState(lesson.contractId);
   const [studentMessage, setStudentMessage] = useState('');
@@ -16,7 +16,6 @@ export default function LessonDetails({ lesson, setIsEditMode }) {
   useEffect(async () => {
     try {
       const { data } = await axios.get('/api/students/active', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
-      console.log(data);
       const studentsJsx = data.map((el) => (
         <option key={el.id} value={el.id}>
           {el.studentName}

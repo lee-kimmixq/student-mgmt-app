@@ -7,6 +7,7 @@ export default function initLessonController(db) {
 
       const lessons = await db.Lesson.findAll({
         attributes: ['id', 'lessonDate'],
+        order: [['lessonDate', 'DESC']],
         include: {
           model: db.Contract,
           where: accountIdObj,
@@ -42,7 +43,7 @@ export default function initLessonController(db) {
       const { id } = req.params;
 
       const lesson = await db.Lesson.findByPk(id, {
-        attributes: ['id', 'details', 'lessonDate', 'createdAt', 'updatedAt'],
+        attributes: ['id', 'details', 'lessonDate', 'createdAt', 'updatedAt', 'contractId'],
         include: {
           model: db.Contract,
           attributes: ['studentName'],
