@@ -78,26 +78,25 @@ export default function LessonForm() {
   };
 
   return (
-    <div>
+    <div className="form-control flex items-center justify-center">
       <form>
-        <label htmlFor="date">Date:</label>
-        <input type="date" id="date" value={date} onChange={handleDateChange} />
+        <label htmlFor="date" className="label">Date</label>
+        <input type="date" id="date" className="input input-bordered" value={date} onChange={handleDateChange} />
         <span>{dateMessage}</span>
         <br />
-        <label htmlFor="student-id">Student:</label>
-        <select id="student-id" onChange={handleStudentIdChange} value={studentId}>
+        <label htmlFor="student-id" className="label">Student</label>
+        <select id="student-id" className="select select-bordered" onChange={handleStudentIdChange} value={studentId}>
           <option value="">Choose Student</option>
           {studentList}
         </select>
         <span>{studentMessage}</span>
         <br />
-        <label htmlFor="details">Details:</label>
-        <textarea type="text" id="details" value={details} onChange={handleDetailsChange} />
+        <label htmlFor="details" className="label">Details</label>
+        <textarea rows="500" cols="200" type="text" id="details" className="input input-bordered w-full" value={details} onChange={handleDetailsChange} />
         <span>{detailsMessage}</span>
         <br />
-        <button type="submit" onClick={handleSubmit}>Submit Lesson Log</button>
+        <button type="submit" className="btn btn-sm btn-warning" onClick={handleSubmit}>Edit Lesson</button>
       </form>
-      {successMessage}
     </div>
   );
 }
