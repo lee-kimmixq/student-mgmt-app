@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import useSWR, { mutate } from 'swr';
+import useSWR from 'swr';
 import fetcher from '../../../../utils/fetcher.mjs';
 import getLoginTokenCookie from '../../../../utils/getLoginTokenCookie.mjs';
 import LessonEditForm from './LessonEditForm.jsx';
