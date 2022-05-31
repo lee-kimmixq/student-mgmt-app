@@ -78,7 +78,7 @@ export default function LessonForm() {
   };
 
   return (
-    <div className="form-control flex items-center justify-center">
+    <div className="form-control flex items-center justify-center px-8">
       <form>
         <label htmlFor="date" className="label">Date</label>
         <input type="date" id="date" className="input input-bordered" value={date} onChange={handleDateChange} />
