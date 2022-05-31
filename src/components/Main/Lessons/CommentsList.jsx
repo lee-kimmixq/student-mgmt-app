@@ -13,14 +13,14 @@ export default function CommentsList({ lessonId }) {
 
   const commentsList = comments.map((comment) => (
     <div key={comment.id}>
-      <p className="text-sm">
-        <span className="text-neutral-content">
+      <div className="text-sm">
+        <div className="text-neutral-content">
           <b>{comment.displayName}</b>
           :
           {' '}
           {comment.content}
           {' '}
-        </span>
+        </div>
         <span className="text-xs text-base-content">
           <em>
             (
@@ -28,12 +28,12 @@ export default function CommentsList({ lessonId }) {
             )
           </em>
         </span>
-      </p>
+      </div>
     </div>
   ));
 
   return (
-    <div className="card w-96 bg-base-200 shadow-xl">
+    <div className="card max-w-sm bg-base-100 shadow-xl">
       <div className="card-body">
         <h2 className="card-title text-base">Comments</h2>
         {commentsList}

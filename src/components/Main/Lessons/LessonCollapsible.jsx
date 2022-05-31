@@ -28,15 +28,21 @@ export default function LessonCollapsible({ lesson, isActionMode }) {
       {' '}
       {lesson.commentCount}
       {' '}
-      {lesson.recentCommentDate
+      <span className="text-xs">
+        <em>
+          {lesson.recentCommentDate
       && `(${moment(lesson.recentCommentDate.createdAt).fromNow()})` }
+
+        </em>
+
+      </span>
     </td>
   );
 
   const actionCol = (
     <td>
-      <button type="button" className="btn btn-sm btn-info" onClick={() => { setIsVisible(true); setIsEditMode(true); }}>Edit</button>
-      <button type="button" className="btn btn-sm btn-error" onClick={handleDelete}>Delete</button>
+      <button type="button" className="btn btn-xs btn-info" onClick={() => { setIsVisible(true); setIsEditMode(true); }}>Edit</button>
+      <button type="button" className="btn btn-xs btn-error" onClick={handleDelete}>Delete</button>
     </td>
   );
 
@@ -53,8 +59,10 @@ export default function LessonCollapsible({ lesson, isActionMode }) {
       <>
         {lessonRow}
         <tr>
-          <td colSpan="4">
-            <LessonDetails lessonId={lesson.id} isEditMode={isEditMode} setIsEditMode={setIsEditMode} />
+          <td colSpan="3">
+            <div className="flex justify-center">
+              <LessonDetails lessonId={lesson.id} isEditMode={isEditMode} setIsEditMode={setIsEditMode} />
+            </div>
           </td>
         </tr>
       </>

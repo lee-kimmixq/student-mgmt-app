@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import useSWR from 'swr';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import fetcher from '../../../../utils/fetcher.mjs';
 import getLoginTokenCookie from '../../../../utils/getLoginTokenCookie.mjs';
 import LessonCollapsible from './LessonCollapsible.jsx';
 
 export default function LessonsList() {
-  const [isActionMode, setIsActionMode] = useState(true);
+  const [isActionMode, setIsActionMode] = useState(false);
 
   const { data: lessons, error: lessonsError } = useSWR(['/api/lessons', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }], fetcher);
 
@@ -18,14 +19,15 @@ export default function LessonsList() {
 
   return (
     <div className="overflow-y-auto">
-      <table className="table w-full">
+      <table className="table table-fixed w-[414px] text-sm">
         <thead>
           <tr>
             <th>Date</th>
             <th>Student</th>
-            <th className="flex flex-col items-center">
-              <p>Comments/Actions</p>
+            <th className="flex flex-row items-center justify-center">
+              <FontAwesomeIcon icon="fas fa-comments" />
               <input type="checkbox" className="toggle toggle-sm" checked={isActionMode} onClick={() => { setIsActionMode(!isActionMode); }} />
+              <FontAwesomeIcon icon="fas fa-pen-to-square" />
             </th>
           </tr>
         </thead>

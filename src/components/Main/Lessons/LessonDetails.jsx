@@ -19,32 +19,30 @@ export default function LessonDetails({ lessonId, isEditMode, setIsEditMode }) {
     );
   }
   return (
-    <div>
-      <p>
-        Date:
-        {' '}
-        {moment(lesson.lessonDate).format('MMM Do YYYY HH:mm')}
-      </p>
-      <p>
-        Student:
-        {' '}
-        {lesson.contract.studentName}
-      </p>
-      <p>
-        Details:
-        {' '}
-        {lesson.details}
-      </p>
-      <p>
-        Created
-        {' '}
-        {moment(lesson.createdAt).fromNow()}
-        , last edited
-        {' '}
-        {moment(lesson.updatedAt).fromNow()}
-      </p>
+    <div className="card w-[380px] bg-base-200 shadow-xl">
+      <div className="card-body">
+        <h2 className="card-title text-base">
+          Lesson Time:
+          {' '}
+          {moment(lesson.lessonDate).format('HH:mm')}
+        </h2>
+        <p>
+          {lesson.details}
+        </p>
 
-      <CommentsList lessonId={lessonId} />
+        <CommentsList lessonId={lessonId} />
+        <div className="badge badge-outline">
+          <em>
+            created
+            {' '}
+            {moment(lesson.createdAt).fromNow()}
+            , last edited
+            {' '}
+            {moment(lesson.updatedAt).fromNow()}
+          </em>
+        </div>
+      </div>
     </div>
+
   );
 }
