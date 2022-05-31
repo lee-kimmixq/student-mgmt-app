@@ -26,11 +26,18 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div>
-        <div>
-          {!isUserLoggedIn && <LoginMain setIsUserLoggedIn={setIsUserLoggedIn} />}
-          {isUserLoggedIn
+      <div className="flex items-center justify-center">
+        <div className="mockup-phone">
+          <div className="camera" />
+          <div className="display">
+            <div className="artboard phone-5 white-bg">
+              <div>
+                {!isUserLoggedIn && <LoginMain setIsUserLoggedIn={setIsUserLoggedIn} />}
+                {isUserLoggedIn
         && <Main setIsUserLoggedIn={setIsUserLoggedIn} accountType={accountType} />}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </BrowserRouter>
