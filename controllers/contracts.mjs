@@ -39,13 +39,21 @@ export default function initContractController(db) {
   const changeStudentStatus = async (req, res) => {
     try {
       const { id } = req.params;
-      const { status } = req.body;
+      const { status, studentName } = req.body;
       const contract = await db.Contract.findByPk(id);
       // TODO: error dealing
-      contract.update({
-        status,
-        updatedAt: new Date(),
-      });
+      if (status) {
+        contract.update({
+          status,
+          updatedAt: new Date(),
+        });
+      }
+      if (studentName) {
+        contract.update({
+          studentName,
+          updatedAt: new Date(),
+        });
+      }
       res.send({ success: true });
     } catch (err) {
       res.status(500).send(err);
