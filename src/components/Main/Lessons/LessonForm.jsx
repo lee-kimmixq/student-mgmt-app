@@ -95,7 +95,7 @@ export default function LessonForm() {
         <textarea rows="500" cols="200" type="text" id="details" className="input input-bordered w-full" value={details} onChange={handleDetailsChange} />
         <span>{detailsMessage}</span>
         <br />
-        <button type="submit" className="btn btn-sm btn-warning" onClick={handleSubmit}>Edit Lesson</button>
+        <button type="submit" className="btn btn-sm btn-warning" onClick={handleSubmit}>Submit</button>
       </form>
     </div>
   );
