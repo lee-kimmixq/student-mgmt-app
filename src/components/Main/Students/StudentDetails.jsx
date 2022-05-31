@@ -7,6 +7,7 @@ export default function StudentDetails({ student }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [studentName, setStudentName] = useState(student.studentName);
+  const [studentNameMessage, setStudentNameMessage] = useState('');
 
   const changeStudentStatus = async (contractId, newStatus) => {
     try {
@@ -20,6 +21,9 @@ export default function StudentDetails({ student }) {
   };
 
   const handleEdit = async (contractId) => {
+    if (!studentName) {
+      setStudentNameMessage('Please input student name!');
+    }
     try {
       const response = await axios.put(`/api/student/${contractId}`, { studentName }, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
       if (response.data.success) {
@@ -65,6 +69,7 @@ export default function StudentDetails({ student }) {
             <input type="text" id="name" className="input input-bordered" value={studentName} onChange={handleStudentNameChange} />
             <button type="submit" className="btn btn-sm btn-warning" onClick={() => handleEdit(student.id)}>Edit Student Name</button>
           </div>
+          <p className="text-xs italic text-rose-600 leading-6 indent-2 mx-3">{studentNameMessage}</p>
         </tr>
         )}
         <tr>
