@@ -13,26 +13,33 @@ export default function CommentsList({ lessonId }) {
 
   const commentsList = comments.map((comment) => (
     <div key={comment.id}>
-      <p>
-        {comment.displayName}
-        :
-        {' '}
-        {comment.content}
-        {' '}
-        (
-        {moment(comment.createdAt).fromNow()}
-        )
+      <p className="text-sm">
+        <span className="text-neutral-content">
+          <b>{comment.displayName}</b>
+          :
+          {' '}
+          {comment.content}
+          {' '}
+        </span>
+        <span className="text-xs text-base-content">
+          <em>
+            (
+            {moment(comment.createdAt).fromNow()}
+            )
+          </em>
+        </span>
       </p>
     </div>
   ));
 
   return (
-    <div>
-      <h4>Comments</h4>
-      <div>
+    <div className="card w-96 bg-base-200 shadow-xl">
+      <div className="card-body">
+        <h2 className="card-title text-base">Comments</h2>
         {commentsList}
+        <CommentForm lessonId={lessonId} />
       </div>
-      <CommentForm lessonId={lessonId} />
     </div>
+
   );
 }

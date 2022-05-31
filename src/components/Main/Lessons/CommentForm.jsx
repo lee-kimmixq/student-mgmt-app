@@ -35,15 +35,15 @@ export default function CommentForm({ lessonId }) {
   if (isVisible) {
     return (
       <form>
-        <textarea type="text" id="content" value={content} onChange={handleContentChange} />
+        <textarea type="text" id="content" value={content} className="input input-bordered w-full text-sm" onChange={handleContentChange} />
         <span>{contentMessage}</span>
         <br />
-        <button type="submit" onClick={handleSubmit}>Comment</button>
+        <button type="submit" className="btn btn-sm btn-warning" onClick={handleSubmit}>Comment</button>
       </form>
     );
   }
   return (
-    <button type="button" onClick={() => setIsVisible(true)}>
+    <button type="button" className="btn btn-sm btn-warning" onClick={() => setIsVisible(true)}>
       New Comment
     </button>
   );
