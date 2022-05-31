@@ -30,7 +30,7 @@ export default function App() {
         <div className="mockup-phone">
           <div className="camera" />
           <div className="display">
-            <div className="artboard phone-5 white-bg">
+            <div className="artboard phone-5 white-bg overflow-y-scroll">
               <div>
                 {!isUserLoggedIn && <LoginMain setIsUserLoggedIn={setIsUserLoggedIn} />}
                 {isUserLoggedIn
