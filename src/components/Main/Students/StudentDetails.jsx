@@ -67,7 +67,7 @@ export default function StudentDetails({ student }) {
         <tr>
           <div className="flex items-center mx-2">
             <input type="text" id="name" className="input input-bordered" value={studentName} onChange={handleStudentNameChange} />
-            <button type="submit" className="btn btn-sm btn-warning" onClick={() => handleEdit(student.id)}>Edit Student Name</button>
+            <button type="submit" className="btn btn-md btn-warning" onClick={() => handleEdit(student.id)}>Edit Student Name</button>
           </div>
           <p className="text-xs italic text-rose-600 leading-6 indent-2 mx-3">{studentNameMessage}</p>
         </tr>
