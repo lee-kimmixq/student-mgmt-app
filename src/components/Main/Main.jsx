@@ -16,7 +16,7 @@ export default function Main({ setIsUserLoggedIn, accountType }) {
       <Routes>
         <Route path="students" element={<StudentsList />} />
         <Route path="teachers" element={<TeachersList />} />
-        <Route path="lessons" element={<LessonsList />} />
+        <Route path="lessons" element={<LessonsList accountType={accountType} />} />
         <Route path="new-lesson" element={<LessonForm />} />
         <Route path="find-teacher" element={<TeacherForm />} />
         <Route path="invoices" element={<InvoicesList />} />
