@@ -107,7 +107,7 @@ export default function SignupForm() {
   return (
     <div className="relative hero bg-base-200">
 
-      <div className={`${successVisibility} fixed inset-x-0 top-0 z-10 alert alert-success shadow-lg flex justify-center`}>
+      <div className={`${successVisibility} fixed inset-x-0 top-0 z-50 alert alert-success shadow-lg flex justify-center`}>
         <div>
           <FontAwesomeIcon icon="fas fa-circle-check" />
           <span>

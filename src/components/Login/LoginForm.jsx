@@ -47,7 +47,7 @@ export default function LoginForm({ setIsUserLoggedIn }) {
 
   return (
     <div className="relative hero bg-base-200">
-      <div className={`${alertVisibility} fixed inset-x-0 top-0 z-10 alert alert-error shadow-lg flex justify-center`}>
+      <div className={`${alertVisibility} fixed inset-x-0 top-0 z-50 alert alert-error shadow-lg flex justify-center`}>
         <div>
           <FontAwesomeIcon icon="fas fa-circle-xmark" />
           <span>Wrong username or password!</span>
