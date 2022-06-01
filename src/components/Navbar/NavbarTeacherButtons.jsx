@@ -15,11 +15,11 @@ export default function NavbarTeacherButtons() {
         </Link>
       </li>
       <li><Link to="/new-lesson">Create New Log</Link></li>
-      <li>
+      {/* <li>
         <Link to="/invoices">
           Invoices
         </Link>
-      </li>
+      </li> */}
     </ul>
   );
 }
