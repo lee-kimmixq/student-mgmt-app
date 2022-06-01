@@ -22,16 +22,16 @@ export default function LessonDetails({ lessonId, isEditMode, setIsEditMode }) {
     <div className="card w-[380px] bg-base-200 shadow-xl">
       <div className="card-body">
         <h2 className="card-title text-base">
-          Lesson Time:
+          Lesson Notes
           {' '}
-          {moment(lesson.lessonDate).format('HH:mm')}
+          {/* {moment(lesson.lessonDate).format('HH:mm')} */}
         </h2>
-        <p>
+        <p className="whitespace-pre-line">
           {lesson.details}
         </p>
 
         <CommentsList lessonId={lessonId} />
-        <div className="badge badge-outline">
+        <div className="whitespace-pre-line">
           <em>
             created
             {' '}
