@@ -28,7 +28,7 @@ export default function App() {
     <BrowserRouter>
       <div className="flex items-center justify-center">
         <div className="mockup-phone">
-          <div className="camera" />
+          <div className="camera -z-50" />
           <div className="display">
             <div className="artboard phone-5 white-bg overflow-y-scroll">
               <div>
