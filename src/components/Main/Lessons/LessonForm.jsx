@@ -15,12 +15,14 @@ export default function LessonForm() {
 
   useEffect(async () => {
     try {
+      // definitely could write a util function to get the header object with the token, since you use the same code here as well
       const { data } = await axios.get('/api/students/active', { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
       const studentsJsx = data.map((el) => (
         <option key={el.id} value={el.id}>
           {el.studentName}
         </option>
       ));
+      // setting Jsx into state seems a bit odd to me. I would rather keep the raw data in state, and then map it when necessary. Without typescript i wouldn't know what the jsx should look like, and overwriting etc. might be easy. Since you use SWR in another place, you could use it here as well by the way.
       setStudentList(studentsJsx);
     } catch (err) {
       console.log(err.response.data);
@@ -39,6 +41,7 @@ export default function LessonForm() {
     setDate(e.target.value);
   };
 
+  // nice to keep todos but from experience todos in comment format will never be touched again :D!
   // TODO: date validation
 
   const checkBlank = () => {

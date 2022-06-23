@@ -31,3 +31,5 @@ export default function StudentsList() {
     </div>
   );
 }
+
+// use of table is quite oldschool. I think flexbox or grid is preferred.

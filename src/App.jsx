@@ -43,3 +43,7 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
+// I saw that you divided the routes inbetween multiple files. This might get confusing and hard to work with in the future. Ideally Routes are all defined in one place, preferably the top-level of your app
+
+// Nicely coded. Mostly clean. I think can improve the readability a bit more by improving on your usage of your if conditions, by using enums and by reducing the amount of ternary operators. Using tables instead of flex/grid was not the best move I think, but also not too bad to see how websites were styled 20 years ago :D!

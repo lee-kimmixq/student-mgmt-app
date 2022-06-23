@@ -10,6 +10,7 @@ import CommentsList from './CommentsList.jsx';
 export default function LessonDetails({ lessonId, isEditMode, setIsEditMode }) {
   const { data: lesson, error } = useSWR([`/api/lesson/${lessonId}`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }], fetcher);
 
+  // noice
   if (error) return <div>error</div>;
   if (!lesson) return <div>loading</div>;
 

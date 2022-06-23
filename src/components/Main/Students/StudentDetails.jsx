@@ -9,6 +9,8 @@ export default function StudentDetails({ student }) {
   const [studentName, setStudentName] = useState(student.studentName);
   const [studentNameMessage, setStudentNameMessage] = useState('');
 
+// repetitive use of the header token, might be able to refactor it. Same goes for the endpoint.
+
   const changeStudentStatus = async (contractId, newStatus) => {
     try {
       const response = await axios.put(`/api/student/${contractId}`, { status: newStatus }, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } });
@@ -38,6 +40,7 @@ export default function StudentDetails({ student }) {
     setStudentName(e.target.value);
   };
 
+  // I think you could put these buttons into their own file.
   const acceptButton = (contractId) => <button type="button" className="btn btn-accent btn-xs" onClick={() => { changeStudentStatus(contractId, 'accepted'); }}>Accept</button>;
 
   const rejectButton = (contractId) => <button type="button" className="btn btn-secondary btn-xs" onClick={() => { changeStudentStatus(contractId, 'rejected'); }}>Reject</button>;
@@ -59,6 +62,9 @@ export default function StudentDetails({ student }) {
     </tr>
   );
 
+  // i would reverse this.
+  // if (!isExpanded) return studentRow
+  // return ....
   if (isExpanded) {
     return (
       <>
@@ -76,6 +82,18 @@ export default function StudentDetails({ student }) {
           <td>
             {editButton(student.id)}
             {(student.status === 'requested' || student.status === 'inactive') && acceptButton(student.id)}
+            {/* I think we could use a function or an object for this here */}
+            {/* const actionButtons = {
+                ['requested']: rejectButton(student.id),
+                ['accepted']: inactiveButton(student.id),
+                ['rejected']: requestButton(student.id),
+              }
+
+              then use it here like
+              {actionButtons[student.status]}
+
+              or something along these lines. Need to maybe refactor the student.id parameter somehow or can also use a function.
+            } */}
             {student.status === 'requested' && rejectButton(student.id)}
             {student.status === 'accepted' && inactiveButton(student.id)}
             {student.status === 'rejected' && requestButton(student.id)}
