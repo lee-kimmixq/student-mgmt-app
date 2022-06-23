@@ -12,6 +12,7 @@ export default function LoginForm({ setIsUserLoggedIn }) {
   const [passwordMessage, setPasswordMessage] = useState('');
 
   const togglePasswordType = () => {
+    // how can a password type be not a password?
     setPasswordType(passwordType === 'password' ? 'text' : 'password');
   };
 
@@ -29,6 +30,7 @@ export default function LoginForm({ setIsUserLoggedIn }) {
     e.preventDefault();
     setAlertVisibility('hidden');
     if (!username || !password) {
+      // this seems a bit wonky to me. I am sure we could refactor this somehow to make it easier to follow the flow.
       setUsernameMessage(username ? '' : 'Please fill in your username!');
       setPasswordMessage(password ? '' : 'Please fill in your password!');
       return;

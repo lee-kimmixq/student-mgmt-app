@@ -9,6 +9,7 @@ export default function CommentsList({ lessonId }) {
   const { data: comments, error } = useSWR([`/api/lesson/${lessonId}/comments`, { headers: { Authorization: `Bearer ${getLoginTokenCookie(document.cookie)}` } }], fetcher);
 
   if (error) return <div>error</div>;
+  // what if not loading but there are just no comments?
   if (!comments) return <div>loading</div>;
 
   const commentsList = comments.map((comment) => (

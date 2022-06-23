@@ -22,6 +22,7 @@ export default function LessonCollapsible({ lesson, isActionMode }) {
     }
   };
 
+  // Col might not be the best naming
   const commentCol = (
     <td>
       <FontAwesomeIcon icon="far fa-message" />

@@ -25,6 +25,19 @@ export default function LessonsList({ accountType }) {
             <th>Date</th>
             <th>Student</th>
             <th className="flex flex-row items-center justify-center">
+              {/* For this kind of code, I always recommend defining enums. That way you have one variable that keeps track of all different account types, which you can add/remove types, and will be able to work with account types without much previous knowledge.
+              
+              example:
+              
+                const ACCOUNT_TYPE = {
+                  TEACHER: 'teacher'
+                }
+
+              then use it like:
+
+              {accountType === ACCOUNT_TYPE.TEACHER}
+              
+              */}
               {accountType === 'teacher' ? (
                 <>
                   <FontAwesomeIcon icon="fas fa-comments" />

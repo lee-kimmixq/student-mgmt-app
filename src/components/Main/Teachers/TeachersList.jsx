@@ -16,6 +16,8 @@ export default function TeachersList() {
     </li>
   ));
 
+  // could consider what to render if there are no teachers
+
   return (
     <div>
       <ul>

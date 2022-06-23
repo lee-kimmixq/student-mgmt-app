@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+// signup form is within the Login folder, seems not right :)!
+
 export default function SignupForm() {
   const [username, setUsername] = useState('');
   const [usernameMessage, setUsernameMessage] = useState('');
@@ -21,7 +23,7 @@ export default function SignupForm() {
   };
 
   const checkValidUsername = async () => {
-    if (username === '') {
+    if (!username) {
       setUsernameMessage('Please fill in your username');
       return;
     }
@@ -30,6 +32,7 @@ export default function SignupForm() {
     setUsernameMessage(message);
   };
 
+  // this function could be defined outside of your component
   const checkPasswordMatch = async (pw1, pw2) => {
     const isMatch = pw1 === pw2;
     const message = isMatch ? '' : 'Passwords do not match';
@@ -58,6 +61,7 @@ export default function SignupForm() {
     setAccountType(e.target.id);
   };
 
+  // i think you could give the inputs the required attribute to utilize html validation
   const checkBlank = () => {
     let hasBlank = false;
     if (username === '') {
@@ -88,6 +92,7 @@ export default function SignupForm() {
         username, password, displayName, accountType,
       });
       if (data.signup) {
+        // could probably write a function to reset everything here, but personal preference I guess. This will always be somewhat sub-par if we don't use a good form library.
         setSuccessVisibility('visible');
         setUsername('');
         setPassword('');
@@ -196,6 +201,16 @@ export default function SignupForm() {
               <div className="grid grid-cols-1 gap-4 text-center sm:grid-cols-2">
                 <div>
                   <input className="sr-only" id="parent" name="account-type" type="radio" />
+                  {/* these on click handlers are not fully necessary actually if you are using an anonymous function already. You could just directly call your desired functions. 
+                  change onClick={(e) => { handleAccountTypeChange(e); to
+                  
+                    onClick={(e) => { 
+                        setAccountTypeMessage('');
+                        setAccountType(e.target.id);
+                      }
+                    }
+                  
+                  */}
                   <label htmlFor="parent" id="parent" className={accountType === 'parent' ? 'btn  btn-outline btn-sm' : 'btn btn-ghost btn-sm'} onClick={(e) => { handleAccountTypeChange(e); }}>
                     Parent
                   </label>
@@ -227,3 +242,5 @@ export default function SignupForm() {
     </div>
   );
 }
+
+// could still consider moving the different form fields into their own respective components, but not fully required!
